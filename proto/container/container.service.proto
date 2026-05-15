@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package DockerController;
+
+import "google/protobuf/empty.proto";
+import "container/resources.messages.proto";
+
+option go_package = "DockerController/proto";
+
+service DockerController {
+  rpc Create(CreateContainerRequest) returns (Container);
+  rpc Get(ContainerRequest) returns (Container);
+  rpc Delete(ContainerRequest) returns (google.protobuf.Empty);
+
+  rpc Start(ContainerRequest) returns (Container);
+  rpc Restart(ContainerRequest) returns (Container);
+  rpc Stop(ContainerRequest) returns (google.protobuf.Empty);
+
+  rpc GetResourceUsage(GetContainerResourceUsageRequest) returns (ResourceUsage);
+}
+
+message Container {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string status = 4;
+  string state = 5;
+  int64 created_at = 6;
+  repeated string ports = 7;
+  map<string, string> labels = 8;
+}
+
+message CreateContainerRequest {
+  string image = 1;
+  string name = 2;
+}
+
+message ContainerRequest {
+  string id = 1;
+}

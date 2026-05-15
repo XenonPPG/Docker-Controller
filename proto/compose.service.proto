@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package DockerController;
+
+import "google/protobuf/empty.proto";
+import "container/container.service.proto";
+import "container/resources.messages.proto";
+
+option go_package = "DockerController/proto";
+
+service ComposeService {
+  rpc Create(CreateProjectRequest) returns (Project);
+  rpc Get(ProjectRequest) returns (Project);
+  rpc Delete(ProjectRequest) returns (google.protobuf.Empty);
+
+  rpc Stop(ProjectRequest) returns (google.protobuf.Empty);
+  rpc Start(ProjectRequest) returns (Project);
+  rpc Restart(ProjectRequest) returns (Project);
+
+  rpc GetTotalResourceUsage(ProjectRequest) returns (ResourceUsage);
+  rpc GetResourceUsage(ProjectRequest) returns (GetResourceUsageResponse);
+}
+
+message Project {
+  string name = 1;
+  string status = 2;
+  repeated Container containers = 3;
+}
+
+message ProjectRequest {
+  string id = 1;
+}
+
+message CreateProjectRequest {
+  string name = 1;
+  string compose_file = 2;
+}
+
+message ContainerWithResourceUsage {
+  Container container = 1;
+  ResourceUsage resource_usage = 2;
+}
+
+message GetResourceUsageResponse {
+  repeated ContainerWithResourceUsage stats = 1;
+}

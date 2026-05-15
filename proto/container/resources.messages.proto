@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package DockerController;
+
+option go_package = "DockerController/proto";
+
+message ResourceUsage {
+  CpuStats cpu = 1;
+  MemoryStats memory = 2;
+  repeated NetworkStats networks = 3;
+  BlockIOStats block_io = 4;
+}
+
+message GetContainerResourceUsageRequest {
+  string id = 1;
+}
+
+message CpuStats {
+  double percent = 1;
+  int32 online_cpus = 2;
+}
+
+message MemoryStats {
+  uint64 usage = 1;
+  uint64 limit = 2;
+  double percent = 3;
+}
+
+message NetworkStats {
+  string interface = 1;
+  uint64 rx_bytes = 2;
+  uint64 tx_bytes = 3;
+}
+
+message BlockIOStats {
+  uint64 read_bytes = 1;
+  uint64 write_bytes = 2;
+}
