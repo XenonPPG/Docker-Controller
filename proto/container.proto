@@ -3,9 +3,9 @@ syntax = "proto3";
 package DockerController;
 
 import "google/protobuf/empty.proto";
-import "container/resources.messages.proto";
+import "proto/resources.messages.proto";
 
-option go_package = "DockerController/proto";
+option go_package = "DockerController/gen/container_v1";
 
 service DockerController {
   rpc Create(CreateContainerRequest) returns (Container);

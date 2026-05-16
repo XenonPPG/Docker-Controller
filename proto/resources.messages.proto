@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package DockerController;
 
-option go_package = "DockerController/proto";
+option go_package = "DockerController/gen/resources_messages_v1";
 
 message ResourceUsage {
   CpuStats cpu = 1;

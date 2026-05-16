@@ -3,10 +3,10 @@ syntax = "proto3";
 package DockerController;
 
 import "google/protobuf/empty.proto";
-import "container/container.service.proto";
-import "container/resources.messages.proto";
+import "proto/container.proto";
+import "proto/resources.messages.proto";
 
-option go_package = "DockerController/proto";
+option go_package = "DockerController/gen/compose_v1";
 
 service ComposeService {
   rpc Create(CreateProjectRequest) returns (Project);

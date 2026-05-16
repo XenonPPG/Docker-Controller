@@ -1,0 +1,33 @@
+services:
+  protogen:
+    build:
+      context: .
+      dockerfile: gen.proto.Dockerfile
+    volumes:
+      - .:/workspace
+    entrypoint: []
+    command: >
+      /bin/sh -c "find proto -name '*.proto' -print0
+      | xargs -0 protoc -I=.
+      --experimental_allow_proto3_optional
+      --go_out=.
+      --go_opt=module=DockerController
+      --go-grpc_out=.
+      --go-grpc_opt=module=DockerController
+      &&
+      find proto -name '*.proto' -print0
+      | xargs -0 protoc -I=.
+      --experimental_allow_proto3_optional
+      --gotag_out=.
+      --gotag_opt=module=DockerController,inplace=true"
+
+  protodoc:
+    build:
+      context: .
+      dockerfile: gen.doc.Dockerfile
+    volumes:
+      - .:/workspace
+    entrypoint: [ ]
+    command: >
+      /bin/sh -c "mkdir -p doc && 
+      protoc -I. --doc_out=./doc --doc_opt=markdown,index.md proto/*.proto"
