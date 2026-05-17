@@ -296,16 +296,17 @@ const file_proto_compose_proto_rawDesc = "" +
 	"\tcontainer\x18\x01 \x01(\v2\x1b.DockerController.ContainerR\tcontainer\x12F\n" +
 	"\x0eresource_usage\x18\x02 \x01(\v2\x1f.DockerController.ResourceUsageR\rresourceUsage\"^\n" +
 	"\x18GetResourceUsageResponse\x12B\n" +
-	"\x05stats\x18\x01 \x03(\v2,.DockerController.ContainerWithResourceUsageR\x05stats2\xf3\x04\n" +
-	"\x0eComposeService\x12K\n" +
-	"\x06Create\x12&.DockerController.CreateProjectRequest\x1a\x19.DockerController.Project\x12B\n" +
-	"\x03Get\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12B\n" +
-	"\x06Delete\x12 .DockerController.ProjectRequest\x1a\x16.google.protobuf.Empty\x12@\n" +
-	"\x04Stop\x12 .DockerController.ProjectRequest\x1a\x16.google.protobuf.Empty\x12D\n" +
-	"\x05Start\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12F\n" +
-	"\aRestart\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12Z\n" +
-	"\x15GetTotalResourceUsage\x12 .DockerController.ProjectRequest\x1a\x1f.DockerController.ResourceUsage\x12`\n" +
-	"\x10GetResourceUsage\x12 .DockerController.ProjectRequest\x1a*.DockerController.GetResourceUsageResponseB!Z\x1fDockerController/gen/compose_v1b\x06proto3"
+	"\x05stats\x18\x01 \x03(\v2,.DockerController.ContainerWithResourceUsageR\x05stats2\xab\x05\n" +
+	"\x0eComposeService\x12R\n" +
+	"\rCreateProject\x12&.DockerController.CreateProjectRequest\x1a\x19.DockerController.Project\x12I\n" +
+	"\n" +
+	"GetProject\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12I\n" +
+	"\rDeleteProject\x12 .DockerController.ProjectRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
+	"\vStopProject\x12 .DockerController.ProjectRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
+	"\fStartProject\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12M\n" +
+	"\x0eRestartProject\x12 .DockerController.ProjectRequest\x1a\x19.DockerController.Project\x12g\n" +
+	"\x17GetProjectResourceUsage\x12 .DockerController.ProjectRequest\x1a*.DockerController.GetResourceUsageResponse\x12a\n" +
+	"\x1cGetProjectTotalResourceUsage\x12 .DockerController.ProjectRequest\x1a\x1f.DockerController.ResourceUsageB!Z\x1fDockerController/gen/compose_v1b\x06proto3"
 
 var (
 	file_proto_compose_proto_rawDescOnce sync.Once
@@ -335,22 +336,22 @@ var file_proto_compose_proto_depIdxs = []int32{
 	5,  // 1: DockerController.ContainerWithResourceUsage.container:type_name -> DockerController.Container
 	6,  // 2: DockerController.ContainerWithResourceUsage.resource_usage:type_name -> DockerController.ResourceUsage
 	3,  // 3: DockerController.GetResourceUsageResponse.stats:type_name -> DockerController.ContainerWithResourceUsage
-	2,  // 4: DockerController.ComposeService.Create:input_type -> DockerController.CreateProjectRequest
-	1,  // 5: DockerController.ComposeService.Get:input_type -> DockerController.ProjectRequest
-	1,  // 6: DockerController.ComposeService.Delete:input_type -> DockerController.ProjectRequest
-	1,  // 7: DockerController.ComposeService.Stop:input_type -> DockerController.ProjectRequest
-	1,  // 8: DockerController.ComposeService.Start:input_type -> DockerController.ProjectRequest
-	1,  // 9: DockerController.ComposeService.Restart:input_type -> DockerController.ProjectRequest
-	1,  // 10: DockerController.ComposeService.GetTotalResourceUsage:input_type -> DockerController.ProjectRequest
-	1,  // 11: DockerController.ComposeService.GetResourceUsage:input_type -> DockerController.ProjectRequest
-	0,  // 12: DockerController.ComposeService.Create:output_type -> DockerController.Project
-	0,  // 13: DockerController.ComposeService.Get:output_type -> DockerController.Project
-	7,  // 14: DockerController.ComposeService.Delete:output_type -> google.protobuf.Empty
-	7,  // 15: DockerController.ComposeService.Stop:output_type -> google.protobuf.Empty
-	0,  // 16: DockerController.ComposeService.Start:output_type -> DockerController.Project
-	0,  // 17: DockerController.ComposeService.Restart:output_type -> DockerController.Project
-	6,  // 18: DockerController.ComposeService.GetTotalResourceUsage:output_type -> DockerController.ResourceUsage
-	4,  // 19: DockerController.ComposeService.GetResourceUsage:output_type -> DockerController.GetResourceUsageResponse
+	2,  // 4: DockerController.ComposeService.CreateProject:input_type -> DockerController.CreateProjectRequest
+	1,  // 5: DockerController.ComposeService.GetProject:input_type -> DockerController.ProjectRequest
+	1,  // 6: DockerController.ComposeService.DeleteProject:input_type -> DockerController.ProjectRequest
+	1,  // 7: DockerController.ComposeService.StopProject:input_type -> DockerController.ProjectRequest
+	1,  // 8: DockerController.ComposeService.StartProject:input_type -> DockerController.ProjectRequest
+	1,  // 9: DockerController.ComposeService.RestartProject:input_type -> DockerController.ProjectRequest
+	1,  // 10: DockerController.ComposeService.GetProjectResourceUsage:input_type -> DockerController.ProjectRequest
+	1,  // 11: DockerController.ComposeService.GetProjectTotalResourceUsage:input_type -> DockerController.ProjectRequest
+	0,  // 12: DockerController.ComposeService.CreateProject:output_type -> DockerController.Project
+	0,  // 13: DockerController.ComposeService.GetProject:output_type -> DockerController.Project
+	7,  // 14: DockerController.ComposeService.DeleteProject:output_type -> google.protobuf.Empty
+	7,  // 15: DockerController.ComposeService.StopProject:output_type -> google.protobuf.Empty
+	0,  // 16: DockerController.ComposeService.StartProject:output_type -> DockerController.Project
+	0,  // 17: DockerController.ComposeService.RestartProject:output_type -> DockerController.Project
+	4,  // 18: DockerController.ComposeService.GetProjectResourceUsage:output_type -> DockerController.GetResourceUsageResponse
+	6,  // 19: DockerController.ComposeService.GetProjectTotalResourceUsage:output_type -> DockerController.ResourceUsage
 	12, // [12:20] is the sub-list for method output_type
 	4,  // [4:12] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name

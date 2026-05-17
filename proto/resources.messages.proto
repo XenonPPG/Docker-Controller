@@ -11,10 +11,6 @@ message ResourceUsage {
   BlockIOStats block_io = 4;
 }
 
-message GetContainerResourceUsageRequest {
-  string id = 1;
-}
-
 message CpuStats {
   double percent = 1;
   int32 online_cpus = 2;

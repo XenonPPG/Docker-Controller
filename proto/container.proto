@@ -7,16 +7,16 @@ import "proto/resources.messages.proto";
 
 option go_package = "DockerController/gen/container_v1";
 
-service DockerController {
-  rpc Create(CreateContainerRequest) returns (Container);
-  rpc Get(ContainerRequest) returns (Container);
-  rpc Delete(ContainerRequest) returns (google.protobuf.Empty);
+service ContainerService {
+  rpc CreateContainer(CreateContainerRequest) returns (Container);
+  rpc GetContainer(ContainerRequest) returns (Container);
+  rpc DeleteContainer(ContainerRequest) returns (google.protobuf.Empty);
 
-  rpc Start(ContainerRequest) returns (Container);
-  rpc Restart(ContainerRequest) returns (Container);
-  rpc Stop(ContainerRequest) returns (google.protobuf.Empty);
+  rpc StartContainer(ContainerRequest) returns (Container);
+  rpc RestartContainer(ContainerRequest) returns (Container);
+  rpc StopContainer(ContainerRequest) returns (google.protobuf.Empty);
 
-  rpc GetResourceUsage(GetContainerResourceUsageRequest) returns (ResourceUsage);
+  rpc GetContainerResourceUsage(ContainerRequest) returns (ResourceUsage);
 }
 
 message Container {

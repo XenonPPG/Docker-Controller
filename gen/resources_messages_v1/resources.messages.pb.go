@@ -89,50 +89,6 @@ func (x *ResourceUsage) GetBlockIo() *BlockIOStats {
 	return nil
 }
 
-type GetContainerResourceUsageRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetContainerResourceUsageRequest) Reset() {
-	*x = GetContainerResourceUsageRequest{}
-	mi := &file_proto_resources_messages_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetContainerResourceUsageRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetContainerResourceUsageRequest) ProtoMessage() {}
-
-func (x *GetContainerResourceUsageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resources_messages_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetContainerResourceUsageRequest.ProtoReflect.Descriptor instead.
-func (*GetContainerResourceUsageRequest) Descriptor() ([]byte, []int) {
-	return file_proto_resources_messages_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *GetContainerResourceUsageRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
 type CpuStats struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Percent       float64                `protobuf:"fixed64,1,opt,name=percent,proto3" json:"percent,omitempty"`
@@ -143,7 +99,7 @@ type CpuStats struct {
 
 func (x *CpuStats) Reset() {
 	*x = CpuStats{}
-	mi := &file_proto_resources_messages_proto_msgTypes[2]
+	mi := &file_proto_resources_messages_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -155,7 +111,7 @@ func (x *CpuStats) String() string {
 func (*CpuStats) ProtoMessage() {}
 
 func (x *CpuStats) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resources_messages_proto_msgTypes[2]
+	mi := &file_proto_resources_messages_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -168,7 +124,7 @@ func (x *CpuStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CpuStats.ProtoReflect.Descriptor instead.
 func (*CpuStats) Descriptor() ([]byte, []int) {
-	return file_proto_resources_messages_proto_rawDescGZIP(), []int{2}
+	return file_proto_resources_messages_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CpuStats) GetPercent() float64 {
@@ -196,7 +152,7 @@ type MemoryStats struct {
 
 func (x *MemoryStats) Reset() {
 	*x = MemoryStats{}
-	mi := &file_proto_resources_messages_proto_msgTypes[3]
+	mi := &file_proto_resources_messages_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -208,7 +164,7 @@ func (x *MemoryStats) String() string {
 func (*MemoryStats) ProtoMessage() {}
 
 func (x *MemoryStats) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resources_messages_proto_msgTypes[3]
+	mi := &file_proto_resources_messages_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -221,7 +177,7 @@ func (x *MemoryStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryStats.ProtoReflect.Descriptor instead.
 func (*MemoryStats) Descriptor() ([]byte, []int) {
-	return file_proto_resources_messages_proto_rawDescGZIP(), []int{3}
+	return file_proto_resources_messages_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MemoryStats) GetUsage() uint64 {
@@ -256,7 +212,7 @@ type NetworkStats struct {
 
 func (x *NetworkStats) Reset() {
 	*x = NetworkStats{}
-	mi := &file_proto_resources_messages_proto_msgTypes[4]
+	mi := &file_proto_resources_messages_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -268,7 +224,7 @@ func (x *NetworkStats) String() string {
 func (*NetworkStats) ProtoMessage() {}
 
 func (x *NetworkStats) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resources_messages_proto_msgTypes[4]
+	mi := &file_proto_resources_messages_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -281,7 +237,7 @@ func (x *NetworkStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkStats.ProtoReflect.Descriptor instead.
 func (*NetworkStats) Descriptor() ([]byte, []int) {
-	return file_proto_resources_messages_proto_rawDescGZIP(), []int{4}
+	return file_proto_resources_messages_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *NetworkStats) GetInterface() string {
@@ -315,7 +271,7 @@ type BlockIOStats struct {
 
 func (x *BlockIOStats) Reset() {
 	*x = BlockIOStats{}
-	mi := &file_proto_resources_messages_proto_msgTypes[5]
+	mi := &file_proto_resources_messages_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -327,7 +283,7 @@ func (x *BlockIOStats) String() string {
 func (*BlockIOStats) ProtoMessage() {}
 
 func (x *BlockIOStats) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resources_messages_proto_msgTypes[5]
+	mi := &file_proto_resources_messages_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -340,7 +296,7 @@ func (x *BlockIOStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockIOStats.ProtoReflect.Descriptor instead.
 func (*BlockIOStats) Descriptor() ([]byte, []int) {
-	return file_proto_resources_messages_proto_rawDescGZIP(), []int{5}
+	return file_proto_resources_messages_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BlockIOStats) GetReadBytes() uint64 {
@@ -366,9 +322,7 @@ const file_proto_resources_messages_proto_rawDesc = "" +
 	"\x03cpu\x18\x01 \x01(\v2\x1a.DockerController.CpuStatsR\x03cpu\x125\n" +
 	"\x06memory\x18\x02 \x01(\v2\x1d.DockerController.MemoryStatsR\x06memory\x12:\n" +
 	"\bnetworks\x18\x03 \x03(\v2\x1e.DockerController.NetworkStatsR\bnetworks\x129\n" +
-	"\bblock_io\x18\x04 \x01(\v2\x1e.DockerController.BlockIOStatsR\ablockIo\"2\n" +
-	" GetContainerResourceUsageRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"E\n" +
+	"\bblock_io\x18\x04 \x01(\v2\x1e.DockerController.BlockIOStatsR\ablockIo\"E\n" +
 	"\bCpuStats\x12\x18\n" +
 	"\apercent\x18\x01 \x01(\x01R\apercent\x12\x1f\n" +
 	"\vonline_cpus\x18\x02 \x01(\x05R\n" +
@@ -399,20 +353,19 @@ func file_proto_resources_messages_proto_rawDescGZIP() []byte {
 	return file_proto_resources_messages_proto_rawDescData
 }
 
-var file_proto_resources_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_proto_resources_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_resources_messages_proto_goTypes = []any{
-	(*ResourceUsage)(nil),                    // 0: DockerController.ResourceUsage
-	(*GetContainerResourceUsageRequest)(nil), // 1: DockerController.GetContainerResourceUsageRequest
-	(*CpuStats)(nil),                         // 2: DockerController.CpuStats
-	(*MemoryStats)(nil),                      // 3: DockerController.MemoryStats
-	(*NetworkStats)(nil),                     // 4: DockerController.NetworkStats
-	(*BlockIOStats)(nil),                     // 5: DockerController.BlockIOStats
+	(*ResourceUsage)(nil), // 0: DockerController.ResourceUsage
+	(*CpuStats)(nil),      // 1: DockerController.CpuStats
+	(*MemoryStats)(nil),   // 2: DockerController.MemoryStats
+	(*NetworkStats)(nil),  // 3: DockerController.NetworkStats
+	(*BlockIOStats)(nil),  // 4: DockerController.BlockIOStats
 }
 var file_proto_resources_messages_proto_depIdxs = []int32{
-	2, // 0: DockerController.ResourceUsage.cpu:type_name -> DockerController.CpuStats
-	3, // 1: DockerController.ResourceUsage.memory:type_name -> DockerController.MemoryStats
-	4, // 2: DockerController.ResourceUsage.networks:type_name -> DockerController.NetworkStats
-	5, // 3: DockerController.ResourceUsage.block_io:type_name -> DockerController.BlockIOStats
+	1, // 0: DockerController.ResourceUsage.cpu:type_name -> DockerController.CpuStats
+	2, // 1: DockerController.ResourceUsage.memory:type_name -> DockerController.MemoryStats
+	3, // 2: DockerController.ResourceUsage.networks:type_name -> DockerController.NetworkStats
+	4, // 3: DockerController.ResourceUsage.block_io:type_name -> DockerController.BlockIOStats
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
@@ -431,7 +384,7 @@ func file_proto_resources_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_resources_messages_proto_rawDesc), len(file_proto_resources_messages_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

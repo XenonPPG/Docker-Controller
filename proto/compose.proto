@@ -9,16 +9,16 @@ import "proto/resources.messages.proto";
 option go_package = "DockerController/gen/compose_v1";
 
 service ComposeService {
-  rpc Create(CreateProjectRequest) returns (Project);
-  rpc Get(ProjectRequest) returns (Project);
-  rpc Delete(ProjectRequest) returns (google.protobuf.Empty);
+  rpc CreateProject(CreateProjectRequest) returns (Project);
+  rpc GetProject(ProjectRequest) returns (Project);
+  rpc DeleteProject(ProjectRequest) returns (google.protobuf.Empty);
 
-  rpc Stop(ProjectRequest) returns (google.protobuf.Empty);
-  rpc Start(ProjectRequest) returns (Project);
-  rpc Restart(ProjectRequest) returns (Project);
+  rpc StopProject(ProjectRequest) returns (google.protobuf.Empty);
+  rpc StartProject(ProjectRequest) returns (Project);
+  rpc RestartProject(ProjectRequest) returns (Project);
 
-  rpc GetTotalResourceUsage(ProjectRequest) returns (ResourceUsage);
-  rpc GetResourceUsage(ProjectRequest) returns (GetResourceUsageResponse);
+  rpc GetProjectResourceUsage(ProjectRequest) returns (GetResourceUsageResponse);
+  rpc GetProjectTotalResourceUsage(ProjectRequest) returns (ResourceUsage);
 }
 
 message Project {

@@ -21,28 +21,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ComposeService_Create_FullMethodName                = "/DockerController.ComposeService/Create"
-	ComposeService_Get_FullMethodName                   = "/DockerController.ComposeService/Get"
-	ComposeService_Delete_FullMethodName                = "/DockerController.ComposeService/Delete"
-	ComposeService_Stop_FullMethodName                  = "/DockerController.ComposeService/Stop"
-	ComposeService_Start_FullMethodName                 = "/DockerController.ComposeService/Start"
-	ComposeService_Restart_FullMethodName               = "/DockerController.ComposeService/Restart"
-	ComposeService_GetTotalResourceUsage_FullMethodName = "/DockerController.ComposeService/GetTotalResourceUsage"
-	ComposeService_GetResourceUsage_FullMethodName      = "/DockerController.ComposeService/GetResourceUsage"
+	ComposeService_CreateProject_FullMethodName                = "/DockerController.ComposeService/CreateProject"
+	ComposeService_GetProject_FullMethodName                   = "/DockerController.ComposeService/GetProject"
+	ComposeService_DeleteProject_FullMethodName                = "/DockerController.ComposeService/DeleteProject"
+	ComposeService_StopProject_FullMethodName                  = "/DockerController.ComposeService/StopProject"
+	ComposeService_StartProject_FullMethodName                 = "/DockerController.ComposeService/StartProject"
+	ComposeService_RestartProject_FullMethodName               = "/DockerController.ComposeService/RestartProject"
+	ComposeService_GetProjectResourceUsage_FullMethodName      = "/DockerController.ComposeService/GetProjectResourceUsage"
+	ComposeService_GetProjectTotalResourceUsage_FullMethodName = "/DockerController.ComposeService/GetProjectTotalResourceUsage"
 )
 
 // ComposeServiceClient is the client API for ComposeService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ComposeServiceClient interface {
-	Create(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*Project, error)
-	Get(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
-	Delete(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Stop(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Start(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
-	Restart(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
-	GetTotalResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
-	GetResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error)
+	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*Project, error)
+	GetProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
+	DeleteProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StopProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
+	RestartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
+	GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error)
+	GetProjectTotalResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
 }
 
 type composeServiceClient struct {
@@ -53,80 +53,80 @@ func NewComposeServiceClient(cc grpc.ClientConnInterface) ComposeServiceClient {
 	return &composeServiceClient{cc}
 }
 
-func (c *composeServiceClient) Create(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*Project, error) {
+func (c *composeServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*Project, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Project)
-	err := c.cc.Invoke(ctx, ComposeService_Create_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_CreateProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) Get(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
+func (c *composeServiceClient) GetProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Project)
-	err := c.cc.Invoke(ctx, ComposeService_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_GetProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) Delete(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *composeServiceClient) DeleteProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, ComposeService_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_DeleteProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) Stop(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *composeServiceClient) StopProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, ComposeService_Stop_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_StopProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) Start(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
+func (c *composeServiceClient) StartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Project)
-	err := c.cc.Invoke(ctx, ComposeService_Start_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_StartProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) Restart(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
+func (c *composeServiceClient) RestartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Project)
-	err := c.cc.Invoke(ctx, ComposeService_Restart_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_RestartProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *composeServiceClient) GetTotalResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(resources_messages_v1.ResourceUsage)
-	err := c.cc.Invoke(ctx, ComposeService_GetTotalResourceUsage_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *composeServiceClient) GetResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error) {
+func (c *composeServiceClient) GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResourceUsageResponse)
-	err := c.cc.Invoke(ctx, ComposeService_GetResourceUsage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ComposeService_GetProjectResourceUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *composeServiceClient) GetProjectTotalResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(resources_messages_v1.ResourceUsage)
+	err := c.cc.Invoke(ctx, ComposeService_GetProjectTotalResourceUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,14 +137,14 @@ func (c *composeServiceClient) GetResourceUsage(ctx context.Context, in *Project
 // All implementations must embed UnimplementedComposeServiceServer
 // for forward compatibility.
 type ComposeServiceServer interface {
-	Create(context.Context, *CreateProjectRequest) (*Project, error)
-	Get(context.Context, *ProjectRequest) (*Project, error)
-	Delete(context.Context, *ProjectRequest) (*emptypb.Empty, error)
-	Stop(context.Context, *ProjectRequest) (*emptypb.Empty, error)
-	Start(context.Context, *ProjectRequest) (*Project, error)
-	Restart(context.Context, *ProjectRequest) (*Project, error)
-	GetTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error)
-	GetResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error)
+	CreateProject(context.Context, *CreateProjectRequest) (*Project, error)
+	GetProject(context.Context, *ProjectRequest) (*Project, error)
+	DeleteProject(context.Context, *ProjectRequest) (*emptypb.Empty, error)
+	StopProject(context.Context, *ProjectRequest) (*emptypb.Empty, error)
+	StartProject(context.Context, *ProjectRequest) (*Project, error)
+	RestartProject(context.Context, *ProjectRequest) (*Project, error)
+	GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error)
+	GetProjectTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error)
 	mustEmbedUnimplementedComposeServiceServer()
 }
 
@@ -155,29 +155,29 @@ type ComposeServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedComposeServiceServer struct{}
 
-func (UnimplementedComposeServiceServer) Create(context.Context, *CreateProjectRequest) (*Project, error) {
-	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedComposeServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*Project, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateProject not implemented")
 }
-func (UnimplementedComposeServiceServer) Get(context.Context, *ProjectRequest) (*Project, error) {
-	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+func (UnimplementedComposeServiceServer) GetProject(context.Context, *ProjectRequest) (*Project, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProject not implemented")
 }
-func (UnimplementedComposeServiceServer) Delete(context.Context, *ProjectRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+func (UnimplementedComposeServiceServer) DeleteProject(context.Context, *ProjectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteProject not implemented")
 }
-func (UnimplementedComposeServiceServer) Stop(context.Context, *ProjectRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
+func (UnimplementedComposeServiceServer) StopProject(context.Context, *ProjectRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopProject not implemented")
 }
-func (UnimplementedComposeServiceServer) Start(context.Context, *ProjectRequest) (*Project, error) {
-	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
+func (UnimplementedComposeServiceServer) StartProject(context.Context, *ProjectRequest) (*Project, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartProject not implemented")
 }
-func (UnimplementedComposeServiceServer) Restart(context.Context, *ProjectRequest) (*Project, error) {
-	return nil, status.Error(codes.Unimplemented, "method Restart not implemented")
+func (UnimplementedComposeServiceServer) RestartProject(context.Context, *ProjectRequest) (*Project, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestartProject not implemented")
 }
-func (UnimplementedComposeServiceServer) GetTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTotalResourceUsage not implemented")
+func (UnimplementedComposeServiceServer) GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProjectResourceUsage not implemented")
 }
-func (UnimplementedComposeServiceServer) GetResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetResourceUsage not implemented")
+func (UnimplementedComposeServiceServer) GetProjectTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProjectTotalResourceUsage not implemented")
 }
 func (UnimplementedComposeServiceServer) mustEmbedUnimplementedComposeServiceServer() {}
 func (UnimplementedComposeServiceServer) testEmbeddedByValue()                        {}
@@ -200,146 +200,146 @@ func RegisterComposeServiceServer(s grpc.ServiceRegistrar, srv ComposeServiceSer
 	s.RegisterService(&ComposeService_ServiceDesc, srv)
 }
 
-func _ComposeService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_CreateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Create(ctx, in)
+		return srv.(ComposeServiceServer).CreateProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Create_FullMethodName,
+		FullMethod: ComposeService_CreateProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Create(ctx, req.(*CreateProjectRequest))
+		return srv.(ComposeServiceServer).CreateProject(ctx, req.(*CreateProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_GetProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Get(ctx, in)
+		return srv.(ComposeServiceServer).GetProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Get_FullMethodName,
+		FullMethod: ComposeService_GetProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Get(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).GetProject(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_DeleteProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Delete(ctx, in)
+		return srv.(ComposeServiceServer).DeleteProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Delete_FullMethodName,
+		FullMethod: ComposeService_DeleteProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Delete(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).DeleteProject(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_StopProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Stop(ctx, in)
+		return srv.(ComposeServiceServer).StopProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Stop_FullMethodName,
+		FullMethod: ComposeService_StopProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Stop(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).StopProject(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_StartProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Start(ctx, in)
+		return srv.(ComposeServiceServer).StartProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Start_FullMethodName,
+		FullMethod: ComposeService_StartProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Start(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).StartProject(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_Restart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_RestartProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).Restart(ctx, in)
+		return srv.(ComposeServiceServer).RestartProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_Restart_FullMethodName,
+		FullMethod: ComposeService_RestartProject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).Restart(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).RestartProject(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_GetTotalResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_GetProjectResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).GetTotalResourceUsage(ctx, in)
+		return srv.(ComposeServiceServer).GetProjectResourceUsage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_GetTotalResourceUsage_FullMethodName,
+		FullMethod: ComposeService_GetProjectResourceUsage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).GetTotalResourceUsage(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).GetProjectResourceUsage(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ComposeService_GetResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ComposeService_GetProjectTotalResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ComposeServiceServer).GetResourceUsage(ctx, in)
+		return srv.(ComposeServiceServer).GetProjectTotalResourceUsage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ComposeService_GetResourceUsage_FullMethodName,
+		FullMethod: ComposeService_GetProjectTotalResourceUsage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComposeServiceServer).GetResourceUsage(ctx, req.(*ProjectRequest))
+		return srv.(ComposeServiceServer).GetProjectTotalResourceUsage(ctx, req.(*ProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -352,36 +352,36 @@ var ComposeService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ComposeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Create",
-			Handler:    _ComposeService_Create_Handler,
+			MethodName: "CreateProject",
+			Handler:    _ComposeService_CreateProject_Handler,
 		},
 		{
-			MethodName: "Get",
-			Handler:    _ComposeService_Get_Handler,
+			MethodName: "GetProject",
+			Handler:    _ComposeService_GetProject_Handler,
 		},
 		{
-			MethodName: "Delete",
-			Handler:    _ComposeService_Delete_Handler,
+			MethodName: "DeleteProject",
+			Handler:    _ComposeService_DeleteProject_Handler,
 		},
 		{
-			MethodName: "Stop",
-			Handler:    _ComposeService_Stop_Handler,
+			MethodName: "StopProject",
+			Handler:    _ComposeService_StopProject_Handler,
 		},
 		{
-			MethodName: "Start",
-			Handler:    _ComposeService_Start_Handler,
+			MethodName: "StartProject",
+			Handler:    _ComposeService_StartProject_Handler,
 		},
 		{
-			MethodName: "Restart",
-			Handler:    _ComposeService_Restart_Handler,
+			MethodName: "RestartProject",
+			Handler:    _ComposeService_RestartProject_Handler,
 		},
 		{
-			MethodName: "GetTotalResourceUsage",
-			Handler:    _ComposeService_GetTotalResourceUsage_Handler,
+			MethodName: "GetProjectResourceUsage",
+			Handler:    _ComposeService_GetProjectResourceUsage_Handler,
 		},
 		{
-			MethodName: "GetResourceUsage",
-			Handler:    _ComposeService_GetResourceUsage_Handler,
+			MethodName: "GetProjectTotalResourceUsage",
+			Handler:    _ComposeService_GetProjectTotalResourceUsage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

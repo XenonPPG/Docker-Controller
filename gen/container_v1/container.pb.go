@@ -241,15 +241,15 @@ const file_proto_container_proto_rawDesc = "" +
 	"\x05image\x18\x01 \x01(\tR\x05image\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"\"\n" +
 	"\x10ContainerRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\xb4\x04\n" +
-	"\x10DockerController\x12O\n" +
-	"\x06Create\x12(.DockerController.CreateContainerRequest\x1a\x1b.DockerController.Container\x12F\n" +
-	"\x03Get\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12D\n" +
-	"\x06Delete\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12H\n" +
-	"\x05Start\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12J\n" +
-	"\aRestart\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12B\n" +
-	"\x04Stop\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12g\n" +
-	"\x10GetResourceUsage\x122.DockerController.GetContainerResourceUsageRequest\x1a\x1f.DockerController.ResourceUsageB#Z!DockerController/gen/container_v1b\x06proto3"
+	"\x02id\x18\x01 \x01(\tR\x02id2\xe3\x04\n" +
+	"\x10ContainerService\x12X\n" +
+	"\x0fCreateContainer\x12(.DockerController.CreateContainerRequest\x1a\x1b.DockerController.Container\x12O\n" +
+	"\fGetContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12M\n" +
+	"\x0fDeleteContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
+	"\x0eStartContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12S\n" +
+	"\x10RestartContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12K\n" +
+	"\rStopContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
+	"\x19GetContainerResourceUsage\x12\".DockerController.ContainerRequest\x1a\x1f.DockerController.ResourceUsageB#Z!DockerController/gen/container_v1b\x06proto3"
 
 var (
 	file_proto_container_proto_rawDescOnce sync.Once
@@ -269,26 +269,25 @@ var file_proto_container_proto_goTypes = []any{
 	(*CreateContainerRequest)(nil), // 1: DockerController.CreateContainerRequest
 	(*ContainerRequest)(nil),       // 2: DockerController.ContainerRequest
 	nil,                            // 3: DockerController.Container.LabelsEntry
-	(*resources_messages_v1.GetContainerResourceUsageRequest)(nil), // 4: DockerController.GetContainerResourceUsageRequest
-	(*emptypb.Empty)(nil),                       // 5: google.protobuf.Empty
-	(*resources_messages_v1.ResourceUsage)(nil), // 6: DockerController.ResourceUsage
+	(*emptypb.Empty)(nil),          // 4: google.protobuf.Empty
+	(*resources_messages_v1.ResourceUsage)(nil), // 5: DockerController.ResourceUsage
 }
 var file_proto_container_proto_depIdxs = []int32{
 	3, // 0: DockerController.Container.labels:type_name -> DockerController.Container.LabelsEntry
-	1, // 1: DockerController.DockerController.Create:input_type -> DockerController.CreateContainerRequest
-	2, // 2: DockerController.DockerController.Get:input_type -> DockerController.ContainerRequest
-	2, // 3: DockerController.DockerController.Delete:input_type -> DockerController.ContainerRequest
-	2, // 4: DockerController.DockerController.Start:input_type -> DockerController.ContainerRequest
-	2, // 5: DockerController.DockerController.Restart:input_type -> DockerController.ContainerRequest
-	2, // 6: DockerController.DockerController.Stop:input_type -> DockerController.ContainerRequest
-	4, // 7: DockerController.DockerController.GetResourceUsage:input_type -> DockerController.GetContainerResourceUsageRequest
-	0, // 8: DockerController.DockerController.Create:output_type -> DockerController.Container
-	0, // 9: DockerController.DockerController.Get:output_type -> DockerController.Container
-	5, // 10: DockerController.DockerController.Delete:output_type -> google.protobuf.Empty
-	0, // 11: DockerController.DockerController.Start:output_type -> DockerController.Container
-	0, // 12: DockerController.DockerController.Restart:output_type -> DockerController.Container
-	5, // 13: DockerController.DockerController.Stop:output_type -> google.protobuf.Empty
-	6, // 14: DockerController.DockerController.GetResourceUsage:output_type -> DockerController.ResourceUsage
+	1, // 1: DockerController.ContainerService.CreateContainer:input_type -> DockerController.CreateContainerRequest
+	2, // 2: DockerController.ContainerService.GetContainer:input_type -> DockerController.ContainerRequest
+	2, // 3: DockerController.ContainerService.DeleteContainer:input_type -> DockerController.ContainerRequest
+	2, // 4: DockerController.ContainerService.StartContainer:input_type -> DockerController.ContainerRequest
+	2, // 5: DockerController.ContainerService.RestartContainer:input_type -> DockerController.ContainerRequest
+	2, // 6: DockerController.ContainerService.StopContainer:input_type -> DockerController.ContainerRequest
+	2, // 7: DockerController.ContainerService.GetContainerResourceUsage:input_type -> DockerController.ContainerRequest
+	0, // 8: DockerController.ContainerService.CreateContainer:output_type -> DockerController.Container
+	0, // 9: DockerController.ContainerService.GetContainer:output_type -> DockerController.Container
+	4, // 10: DockerController.ContainerService.DeleteContainer:output_type -> google.protobuf.Empty
+	0, // 11: DockerController.ContainerService.StartContainer:output_type -> DockerController.Container
+	0, // 12: DockerController.ContainerService.RestartContainer:output_type -> DockerController.Container
+	4, // 13: DockerController.ContainerService.StopContainer:output_type -> google.protobuf.Empty
+	5, // 14: DockerController.ContainerService.GetContainerResourceUsage:output_type -> DockerController.ResourceUsage
 	8, // [8:15] is the sub-list for method output_type
 	1, // [1:8] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

@@ -21,329 +21,329 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DockerController_Create_FullMethodName           = "/DockerController.DockerController/Create"
-	DockerController_Get_FullMethodName              = "/DockerController.DockerController/Get"
-	DockerController_Delete_FullMethodName           = "/DockerController.DockerController/Delete"
-	DockerController_Start_FullMethodName            = "/DockerController.DockerController/Start"
-	DockerController_Restart_FullMethodName          = "/DockerController.DockerController/Restart"
-	DockerController_Stop_FullMethodName             = "/DockerController.DockerController/Stop"
-	DockerController_GetResourceUsage_FullMethodName = "/DockerController.DockerController/GetResourceUsage"
+	ContainerService_CreateContainer_FullMethodName           = "/DockerController.ContainerService/CreateContainer"
+	ContainerService_GetContainer_FullMethodName              = "/DockerController.ContainerService/GetContainer"
+	ContainerService_DeleteContainer_FullMethodName           = "/DockerController.ContainerService/DeleteContainer"
+	ContainerService_StartContainer_FullMethodName            = "/DockerController.ContainerService/StartContainer"
+	ContainerService_RestartContainer_FullMethodName          = "/DockerController.ContainerService/RestartContainer"
+	ContainerService_StopContainer_FullMethodName             = "/DockerController.ContainerService/StopContainer"
+	ContainerService_GetContainerResourceUsage_FullMethodName = "/DockerController.ContainerService/GetContainerResourceUsage"
 )
 
-// DockerControllerClient is the client API for DockerController service.
+// ContainerServiceClient is the client API for ContainerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DockerControllerClient interface {
-	Create(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*Container, error)
-	Get(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
-	Delete(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Start(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
-	Restart(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
-	Stop(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetResourceUsage(ctx context.Context, in *resources_messages_v1.GetContainerResourceUsageRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
+type ContainerServiceClient interface {
+	CreateContainer(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*Container, error)
+	GetContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
+	DeleteContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
+	RestartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
+	StopContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetContainerResourceUsage(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
 }
 
-type dockerControllerClient struct {
+type containerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDockerControllerClient(cc grpc.ClientConnInterface) DockerControllerClient {
-	return &dockerControllerClient{cc}
+func NewContainerServiceClient(cc grpc.ClientConnInterface) ContainerServiceClient {
+	return &containerServiceClient{cc}
 }
 
-func (c *dockerControllerClient) Create(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*Container, error) {
+func (c *containerServiceClient) CreateContainer(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*Container, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Container)
-	err := c.cc.Invoke(ctx, DockerController_Create_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_CreateContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) Get(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
+func (c *containerServiceClient) GetContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Container)
-	err := c.cc.Invoke(ctx, DockerController_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_GetContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) Delete(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *containerServiceClient) DeleteContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, DockerController_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_DeleteContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) Start(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
+func (c *containerServiceClient) StartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Container)
-	err := c.cc.Invoke(ctx, DockerController_Start_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_StartContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) Restart(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
+func (c *containerServiceClient) RestartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Container)
-	err := c.cc.Invoke(ctx, DockerController_Restart_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_RestartContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) Stop(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *containerServiceClient) StopContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, DockerController_Stop_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_StopContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerControllerClient) GetResourceUsage(ctx context.Context, in *resources_messages_v1.GetContainerResourceUsageRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
+func (c *containerServiceClient) GetContainerResourceUsage(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(resources_messages_v1.ResourceUsage)
-	err := c.cc.Invoke(ctx, DockerController_GetResourceUsage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ContainerService_GetContainerResourceUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DockerControllerServer is the server API for DockerController service.
-// All implementations must embed UnimplementedDockerControllerServer
+// ContainerServiceServer is the server API for ContainerService service.
+// All implementations must embed UnimplementedContainerServiceServer
 // for forward compatibility.
-type DockerControllerServer interface {
-	Create(context.Context, *CreateContainerRequest) (*Container, error)
-	Get(context.Context, *ContainerRequest) (*Container, error)
-	Delete(context.Context, *ContainerRequest) (*emptypb.Empty, error)
-	Start(context.Context, *ContainerRequest) (*Container, error)
-	Restart(context.Context, *ContainerRequest) (*Container, error)
-	Stop(context.Context, *ContainerRequest) (*emptypb.Empty, error)
-	GetResourceUsage(context.Context, *resources_messages_v1.GetContainerResourceUsageRequest) (*resources_messages_v1.ResourceUsage, error)
-	mustEmbedUnimplementedDockerControllerServer()
+type ContainerServiceServer interface {
+	CreateContainer(context.Context, *CreateContainerRequest) (*Container, error)
+	GetContainer(context.Context, *ContainerRequest) (*Container, error)
+	DeleteContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error)
+	StartContainer(context.Context, *ContainerRequest) (*Container, error)
+	RestartContainer(context.Context, *ContainerRequest) (*Container, error)
+	StopContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error)
+	GetContainerResourceUsage(context.Context, *ContainerRequest) (*resources_messages_v1.ResourceUsage, error)
+	mustEmbedUnimplementedContainerServiceServer()
 }
 
-// UnimplementedDockerControllerServer must be embedded to have
+// UnimplementedContainerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedDockerControllerServer struct{}
+type UnimplementedContainerServiceServer struct{}
 
-func (UnimplementedDockerControllerServer) Create(context.Context, *CreateContainerRequest) (*Container, error) {
-	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedContainerServiceServer) CreateContainer(context.Context, *CreateContainerRequest) (*Container, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) Get(context.Context, *ContainerRequest) (*Container, error) {
-	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+func (UnimplementedContainerServiceServer) GetContainer(context.Context, *ContainerRequest) (*Container, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) Delete(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+func (UnimplementedContainerServiceServer) DeleteContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) Start(context.Context, *ContainerRequest) (*Container, error) {
-	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
+func (UnimplementedContainerServiceServer) StartContainer(context.Context, *ContainerRequest) (*Container, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) Restart(context.Context, *ContainerRequest) (*Container, error) {
-	return nil, status.Error(codes.Unimplemented, "method Restart not implemented")
+func (UnimplementedContainerServiceServer) RestartContainer(context.Context, *ContainerRequest) (*Container, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestartContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) Stop(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
+func (UnimplementedContainerServiceServer) StopContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopContainer not implemented")
 }
-func (UnimplementedDockerControllerServer) GetResourceUsage(context.Context, *resources_messages_v1.GetContainerResourceUsageRequest) (*resources_messages_v1.ResourceUsage, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetResourceUsage not implemented")
+func (UnimplementedContainerServiceServer) GetContainerResourceUsage(context.Context, *ContainerRequest) (*resources_messages_v1.ResourceUsage, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetContainerResourceUsage not implemented")
 }
-func (UnimplementedDockerControllerServer) mustEmbedUnimplementedDockerControllerServer() {}
-func (UnimplementedDockerControllerServer) testEmbeddedByValue()                          {}
+func (UnimplementedContainerServiceServer) mustEmbedUnimplementedContainerServiceServer() {}
+func (UnimplementedContainerServiceServer) testEmbeddedByValue()                          {}
 
-// UnsafeDockerControllerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DockerControllerServer will
+// UnsafeContainerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ContainerServiceServer will
 // result in compilation errors.
-type UnsafeDockerControllerServer interface {
-	mustEmbedUnimplementedDockerControllerServer()
+type UnsafeContainerServiceServer interface {
+	mustEmbedUnimplementedContainerServiceServer()
 }
 
-func RegisterDockerControllerServer(s grpc.ServiceRegistrar, srv DockerControllerServer) {
-	// If the following call panics, it indicates UnimplementedDockerControllerServer was
+func RegisterContainerServiceServer(s grpc.ServiceRegistrar, srv ContainerServiceServer) {
+	// If the following call panics, it indicates UnimplementedContainerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&DockerController_ServiceDesc, srv)
+	s.RegisterService(&ContainerService_ServiceDesc, srv)
 }
 
-func _DockerController_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_CreateContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Create(ctx, in)
+		return srv.(ContainerServiceServer).CreateContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Create_FullMethodName,
+		FullMethod: ContainerService_CreateContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Create(ctx, req.(*CreateContainerRequest))
+		return srv.(ContainerServiceServer).CreateContainer(ctx, req.(*CreateContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_GetContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Get(ctx, in)
+		return srv.(ContainerServiceServer).GetContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Get_FullMethodName,
+		FullMethod: ContainerService_GetContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Get(ctx, req.(*ContainerRequest))
+		return srv.(ContainerServiceServer).GetContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_DeleteContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Delete(ctx, in)
+		return srv.(ContainerServiceServer).DeleteContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Delete_FullMethodName,
+		FullMethod: ContainerService_DeleteContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Delete(ctx, req.(*ContainerRequest))
+		return srv.(ContainerServiceServer).DeleteContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_StartContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Start(ctx, in)
+		return srv.(ContainerServiceServer).StartContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Start_FullMethodName,
+		FullMethod: ContainerService_StartContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Start(ctx, req.(*ContainerRequest))
+		return srv.(ContainerServiceServer).StartContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_Restart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_RestartContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Restart(ctx, in)
+		return srv.(ContainerServiceServer).RestartContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Restart_FullMethodName,
+		FullMethod: ContainerService_RestartContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Restart(ctx, req.(*ContainerRequest))
+		return srv.(ContainerServiceServer).RestartContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ContainerService_StopContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).Stop(ctx, in)
+		return srv.(ContainerServiceServer).StopContainer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_Stop_FullMethodName,
+		FullMethod: ContainerService_StopContainer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).Stop(ctx, req.(*ContainerRequest))
+		return srv.(ContainerServiceServer).StopContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerController_GetResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(resources_messages_v1.GetContainerResourceUsageRequest)
+func _ContainerService_GetContainerResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ContainerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerControllerServer).GetResourceUsage(ctx, in)
+		return srv.(ContainerServiceServer).GetContainerResourceUsage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerController_GetResourceUsage_FullMethodName,
+		FullMethod: ContainerService_GetContainerResourceUsage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerControllerServer).GetResourceUsage(ctx, req.(*resources_messages_v1.GetContainerResourceUsageRequest))
+		return srv.(ContainerServiceServer).GetContainerResourceUsage(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// DockerController_ServiceDesc is the grpc.ServiceDesc for DockerController service.
+// ContainerService_ServiceDesc is the grpc.ServiceDesc for ContainerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var DockerController_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "DockerController.DockerController",
-	HandlerType: (*DockerControllerServer)(nil),
+var ContainerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "DockerController.ContainerService",
+	HandlerType: (*ContainerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Create",
-			Handler:    _DockerController_Create_Handler,
+			MethodName: "CreateContainer",
+			Handler:    _ContainerService_CreateContainer_Handler,
 		},
 		{
-			MethodName: "Get",
-			Handler:    _DockerController_Get_Handler,
+			MethodName: "GetContainer",
+			Handler:    _ContainerService_GetContainer_Handler,
 		},
 		{
-			MethodName: "Delete",
-			Handler:    _DockerController_Delete_Handler,
+			MethodName: "DeleteContainer",
+			Handler:    _ContainerService_DeleteContainer_Handler,
 		},
 		{
-			MethodName: "Start",
-			Handler:    _DockerController_Start_Handler,
+			MethodName: "StartContainer",
+			Handler:    _ContainerService_StartContainer_Handler,
 		},
 		{
-			MethodName: "Restart",
-			Handler:    _DockerController_Restart_Handler,
+			MethodName: "RestartContainer",
+			Handler:    _ContainerService_RestartContainer_Handler,
 		},
 		{
-			MethodName: "Stop",
-			Handler:    _DockerController_Stop_Handler,
+			MethodName: "StopContainer",
+			Handler:    _ContainerService_StopContainer_Handler,
 		},
 		{
-			MethodName: "GetResourceUsage",
-			Handler:    _DockerController_GetResourceUsage_Handler,
+			MethodName: "GetContainerResourceUsage",
+			Handler:    _ContainerService_GetContainerResourceUsage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -27,12 +27,11 @@
     - [ContainerRequest](#DockerController-ContainerRequest)
     - [CreateContainerRequest](#DockerController-CreateContainerRequest)
   
-    - [DockerController](#DockerController-DockerController)
+    - [ContainerService](#DockerController-ContainerService)
   
 - [proto/resources.messages.proto](#proto_resources-messages-proto)
     - [BlockIOStats](#DockerController-BlockIOStats)
     - [CpuStats](#DockerController-CpuStats)
-    - [GetContainerResourceUsageRequest](#DockerController-GetContainerResourceUsageRequest)
     - [MemoryStats](#DockerController-MemoryStats)
     - [NetworkStats](#DockerController-NetworkStats)
     - [ResourceUsage](#DockerController-ResourceUsage)
@@ -261,14 +260,14 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Create | [CreateProjectRequest](#DockerController-CreateProjectRequest) | [Project](#DockerController-Project) |  |
-| Get | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
-| Delete | [ProjectRequest](#DockerController-ProjectRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
-| Stop | [ProjectRequest](#DockerController-ProjectRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
-| Start | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
-| Restart | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
-| GetTotalResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
-| GetResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse) |  |
+| CreateProject | [CreateProjectRequest](#DockerController-CreateProjectRequest) | [Project](#DockerController-Project) |  |
+| GetProject | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
+| DeleteProject | [ProjectRequest](#DockerController-ProjectRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| StopProject | [ProjectRequest](#DockerController-ProjectRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| StartProject | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
+| RestartProject | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
+| GetProjectResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse) |  |
+| GetProjectTotalResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
 
  
 
@@ -356,20 +355,20 @@
  
 
 
-<a name="DockerController-DockerController"></a>
+<a name="DockerController-ContainerService"></a>
 
-### DockerController
+### ContainerService
 
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Create | [CreateContainerRequest](#DockerController-CreateContainerRequest) | [Container](#DockerController-Container) |  |
-| Get | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
-| Delete | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
-| Start | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
-| Restart | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
-| Stop | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
-| GetResourceUsage | [GetContainerResourceUsageRequest](#DockerController-GetContainerResourceUsageRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
+| CreateContainer | [CreateContainerRequest](#DockerController-CreateContainerRequest) | [Container](#DockerController-Container) |  |
+| GetContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
+| DeleteContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| StartContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
+| RestartContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
+| StopContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| GetContainerResourceUsage | [ContainerRequest](#DockerController-ContainerRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
 
  
 
@@ -408,21 +407,6 @@
 | ----- | ---- | ----- | ----------- |
 | percent | [double](#double) |  |  |
 | online_cpus | [int32](#int32) |  |  |
-
-
-
-
-
-
-<a name="DockerController-GetContainerResourceUsageRequest"></a>
-
-### GetContainerResourceUsageRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
 
 
 
