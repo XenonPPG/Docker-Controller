@@ -23,4 +23,8 @@ func main() {
 	g.Go(func() error {
 		return initializers.ConnectGRPC(server.RegisterFunc())
 	})
+
+	if err := g.Wait(); err != nil {
+		log.Fatal("Program terminated: " + err.Error())
+	}
 }
