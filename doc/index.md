@@ -5,9 +5,10 @@
 
 - [proto/DockerController.proto](#proto_DockerController-proto)
     - [DockerInfo](#DockerController-DockerInfo)
-    - [DockerVersion](#DockerController-DockerVersion)
     - [Event](#DockerController-Event)
     - [Event.AttributesEntry](#DockerController-Event-AttributesEntry)
+    - [ListContainersResponse](#DockerController-ListContainersResponse)
+    - [ListProjectsResponse](#DockerController-ListProjectsResponse)
     - [StreamEventsRequest](#DockerController-StreamEventsRequest)
   
     - [DockerService](#DockerController-DockerService)
@@ -55,7 +56,6 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
 | containers_running | [int32](#int32) |  |  |
 | containers_stopped | [int32](#int32) |  |  |
 | images_count | [int32](#int32) |  |  |
@@ -63,23 +63,6 @@
 | architecture | [string](#string) |  |  |
 | total_memory | [uint64](#uint64) |  |  |
 | cpus | [int32](#int32) |  |  |
-
-
-
-
-
-
-<a name="DockerController-DockerVersion"></a>
-
-### DockerVersion
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| version | [string](#string) |  |  |
-| api_version | [string](#string) |  |  |
-| go_version | [string](#string) |  |  |
 
 
 
@@ -122,6 +105,36 @@
 
 
 
+<a name="DockerController-ListContainersResponse"></a>
+
+### ListContainersResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| containers | [Container](#DockerController-Container) | repeated |  |
+
+
+
+
+
+
+<a name="DockerController-ListProjectsResponse"></a>
+
+### ListProjectsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| projects | [Project](#DockerController-Project) | repeated |  |
+
+
+
+
+
+
 <a name="DockerController-StreamEventsRequest"></a>
 
 ### StreamEventsRequest
@@ -152,10 +165,11 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetInfo | [.google.protobuf.Empty](#google-protobuf-Empty) | [DockerInfo](#DockerController-DockerInfo) |  |
-| GetVersion | [.google.protobuf.Empty](#google-protobuf-Empty) | [DockerVersion](#DockerController-DockerVersion) |  |
 | GetResourceUsage | [.google.protobuf.Empty](#google-protobuf-Empty) | [ResourceUsage](#DockerController-ResourceUsage) |  |
 | StreamEvents | [StreamEventsRequest](#DockerController-StreamEventsRequest) | [Event](#DockerController-Event) stream |  |
 | Ping | [.google.protobuf.Empty](#google-protobuf-Empty) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| ListContainers | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListContainersResponse](#DockerController-ListContainersResponse) |  |
+| ListProjects | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListProjectsResponse](#DockerController-ListProjectsResponse) |  |
 
  
 
@@ -292,9 +306,7 @@
 | name | [string](#string) |  |  |
 | image | [string](#string) |  |  |
 | status | [string](#string) |  |  |
-| state | [string](#string) |  |  |
-| created_at | [int64](#int64) |  |  |
-| ports | [string](#string) | repeated |  |
+| created_at | [string](#string) |  |  |
 | labels | [Container.LabelsEntry](#DockerController-Container-LabelsEntry) | repeated |  |
 
 
@@ -365,6 +377,7 @@
 | CreateContainer | [CreateContainerRequest](#DockerController-CreateContainerRequest) | [Container](#DockerController-Container) |  |
 | GetContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
 | DeleteContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| PauseContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
 | StartContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
 | RestartContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
 | StopContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
@@ -438,7 +451,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| interface | [string](#string) |  |  |
+| name | [string](#string) |  |  |
 | rx_bytes | [uint64](#uint64) |  |  |
 | tx_bytes | [uint64](#uint64) |  |  |
 

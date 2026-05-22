@@ -1,4 +1,14 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "50051:50051"
   protogen:
     build:
       context: .

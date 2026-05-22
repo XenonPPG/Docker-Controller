@@ -9,4 +9,7 @@ generate-proto:
 	docker-compose run --rm protodoc
 	docker-compose down --rmi local
 
+grpc-ui:
+	grpcui -plaintext localhost:50051
+
 .PHONY: generate-doc, generate-proto

@@ -29,10 +29,8 @@ type Container struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	State         string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Ports         []string               `protobuf:"bytes,7,rep,name=ports,proto3" json:"ports,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	CreatedAt     string                 `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Labels        map[string]string      `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -95,25 +93,11 @@ func (x *Container) GetStatus() string {
 	return ""
 }
 
-func (x *Container) GetState() string {
-	if x != nil {
-		return x.State
-	}
-	return ""
-}
-
-func (x *Container) GetCreatedAt() int64 {
+func (x *Container) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
-}
-
-func (x *Container) GetPorts() []string {
-	if x != nil {
-		return x.Ports
-	}
-	return nil
+	return ""
 }
 
 func (x *Container) GetLabels() map[string]string {
@@ -223,17 +207,15 @@ var File_proto_container_proto protoreflect.FileDescriptor
 
 const file_proto_container_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/container.proto\x12\x10DockerController\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1eproto/resources.messages.proto\"\xa4\x02\n" +
+	"\x15proto/container.proto\x12\x10DockerController\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1eproto/resources.messages.proto\"\xf8\x01\n" +
 	"\tContainer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05image\x18\x03 \x01(\tR\x05image\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x14\n" +
-	"\x05state\x18\x05 \x01(\tR\x05state\x12\x1d\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x14\n" +
-	"\x05ports\x18\a \x03(\tR\x05ports\x12?\n" +
-	"\x06labels\x18\b \x03(\v2'.DockerController.Container.LabelsEntryR\x06labels\x1a9\n" +
+	"created_at\x18\x05 \x01(\tR\tcreatedAt\x12?\n" +
+	"\x06labels\x18\x06 \x03(\v2'.DockerController.Container.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"B\n" +
@@ -241,11 +223,12 @@ const file_proto_container_proto_rawDesc = "" +
 	"\x05image\x18\x01 \x01(\tR\x05image\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"\"\n" +
 	"\x10ContainerRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\xe3\x04\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2\xb1\x05\n" +
 	"\x10ContainerService\x12X\n" +
 	"\x0fCreateContainer\x12(.DockerController.CreateContainerRequest\x1a\x1b.DockerController.Container\x12O\n" +
 	"\fGetContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12M\n" +
-	"\x0fDeleteContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
+	"\x0fDeleteContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12L\n" +
+	"\x0ePauseContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
 	"\x0eStartContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12S\n" +
 	"\x10RestartContainer\x12\".DockerController.ContainerRequest\x1a\x1b.DockerController.Container\x12K\n" +
 	"\rStopContainer\x12\".DockerController.ContainerRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
@@ -277,19 +260,21 @@ var file_proto_container_proto_depIdxs = []int32{
 	1, // 1: DockerController.ContainerService.CreateContainer:input_type -> DockerController.CreateContainerRequest
 	2, // 2: DockerController.ContainerService.GetContainer:input_type -> DockerController.ContainerRequest
 	2, // 3: DockerController.ContainerService.DeleteContainer:input_type -> DockerController.ContainerRequest
-	2, // 4: DockerController.ContainerService.StartContainer:input_type -> DockerController.ContainerRequest
-	2, // 5: DockerController.ContainerService.RestartContainer:input_type -> DockerController.ContainerRequest
-	2, // 6: DockerController.ContainerService.StopContainer:input_type -> DockerController.ContainerRequest
-	2, // 7: DockerController.ContainerService.GetContainerResourceUsage:input_type -> DockerController.ContainerRequest
-	0, // 8: DockerController.ContainerService.CreateContainer:output_type -> DockerController.Container
-	0, // 9: DockerController.ContainerService.GetContainer:output_type -> DockerController.Container
-	4, // 10: DockerController.ContainerService.DeleteContainer:output_type -> google.protobuf.Empty
-	0, // 11: DockerController.ContainerService.StartContainer:output_type -> DockerController.Container
-	0, // 12: DockerController.ContainerService.RestartContainer:output_type -> DockerController.Container
-	4, // 13: DockerController.ContainerService.StopContainer:output_type -> google.protobuf.Empty
-	5, // 14: DockerController.ContainerService.GetContainerResourceUsage:output_type -> DockerController.ResourceUsage
-	8, // [8:15] is the sub-list for method output_type
-	1, // [1:8] is the sub-list for method input_type
+	2, // 4: DockerController.ContainerService.PauseContainer:input_type -> DockerController.ContainerRequest
+	2, // 5: DockerController.ContainerService.StartContainer:input_type -> DockerController.ContainerRequest
+	2, // 6: DockerController.ContainerService.RestartContainer:input_type -> DockerController.ContainerRequest
+	2, // 7: DockerController.ContainerService.StopContainer:input_type -> DockerController.ContainerRequest
+	2, // 8: DockerController.ContainerService.GetContainerResourceUsage:input_type -> DockerController.ContainerRequest
+	0, // 9: DockerController.ContainerService.CreateContainer:output_type -> DockerController.Container
+	0, // 10: DockerController.ContainerService.GetContainer:output_type -> DockerController.Container
+	4, // 11: DockerController.ContainerService.DeleteContainer:output_type -> google.protobuf.Empty
+	4, // 12: DockerController.ContainerService.PauseContainer:output_type -> google.protobuf.Empty
+	0, // 13: DockerController.ContainerService.StartContainer:output_type -> DockerController.Container
+	0, // 14: DockerController.ContainerService.RestartContainer:output_type -> DockerController.Container
+	4, // 15: DockerController.ContainerService.StopContainer:output_type -> google.protobuf.Empty
+	5, // 16: DockerController.ContainerService.GetContainerResourceUsage:output_type -> DockerController.ResourceUsage
+	9, // [9:17] is the sub-list for method output_type
+	1, // [1:9] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name

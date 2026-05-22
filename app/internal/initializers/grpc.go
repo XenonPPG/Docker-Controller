@@ -9,6 +9,7 @@ import (
 	"syscall"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func ConnectGRPC(registerFunc func(server *grpc.Server)) error {
@@ -18,6 +19,7 @@ func ConnectGRPC(registerFunc func(server *grpc.Server)) error {
 	}
 
 	s := grpc.NewServer()
+	reflection.Register(s)
 	registerFunc(s)
 
 	// server error channel

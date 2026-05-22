@@ -203,7 +203,7 @@ func (x *MemoryStats) GetPercent() float64 {
 
 type NetworkStats struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Interface     string                 `protobuf:"bytes,1,opt,name=interface,proto3" json:"interface,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	RxBytes       uint64                 `protobuf:"varint,2,opt,name=rx_bytes,json=rxBytes,proto3" json:"rx_bytes,omitempty"`
 	TxBytes       uint64                 `protobuf:"varint,3,opt,name=tx_bytes,json=txBytes,proto3" json:"tx_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -240,9 +240,9 @@ func (*NetworkStats) Descriptor() ([]byte, []int) {
 	return file_proto_resources_messages_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *NetworkStats) GetInterface() string {
+func (x *NetworkStats) GetName() string {
 	if x != nil {
-		return x.Interface
+		return x.Name
 	}
 	return ""
 }
@@ -330,9 +330,9 @@ const file_proto_resources_messages_proto_rawDesc = "" +
 	"\vMemoryStats\x12\x14\n" +
 	"\x05usage\x18\x01 \x01(\x04R\x05usage\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x04R\x05limit\x12\x18\n" +
-	"\apercent\x18\x03 \x01(\x01R\apercent\"b\n" +
-	"\fNetworkStats\x12\x1c\n" +
-	"\tinterface\x18\x01 \x01(\tR\tinterface\x12\x19\n" +
+	"\apercent\x18\x03 \x01(\x01R\apercent\"X\n" +
+	"\fNetworkStats\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x19\n" +
 	"\brx_bytes\x18\x02 \x01(\x04R\arxBytes\x12\x19\n" +
 	"\btx_bytes\x18\x03 \x01(\x04R\atxBytes\"N\n" +
 	"\fBlockIOStats\x12\x1d\n" +

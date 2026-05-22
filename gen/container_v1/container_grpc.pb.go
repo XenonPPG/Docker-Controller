@@ -24,6 +24,7 @@ const (
 	ContainerService_CreateContainer_FullMethodName           = "/DockerController.ContainerService/CreateContainer"
 	ContainerService_GetContainer_FullMethodName              = "/DockerController.ContainerService/GetContainer"
 	ContainerService_DeleteContainer_FullMethodName           = "/DockerController.ContainerService/DeleteContainer"
+	ContainerService_PauseContainer_FullMethodName            = "/DockerController.ContainerService/PauseContainer"
 	ContainerService_StartContainer_FullMethodName            = "/DockerController.ContainerService/StartContainer"
 	ContainerService_RestartContainer_FullMethodName          = "/DockerController.ContainerService/RestartContainer"
 	ContainerService_StopContainer_FullMethodName             = "/DockerController.ContainerService/StopContainer"
@@ -37,6 +38,7 @@ type ContainerServiceClient interface {
 	CreateContainer(ctx context.Context, in *CreateContainerRequest, opts ...grpc.CallOption) (*Container, error)
 	GetContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
 	DeleteContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	PauseContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	StartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
 	RestartContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*Container, error)
 	StopContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -75,6 +77,16 @@ func (c *containerServiceClient) DeleteContainer(ctx context.Context, in *Contai
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, ContainerService_DeleteContainer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *containerServiceClient) PauseContainer(ctx context.Context, in *ContainerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ContainerService_PauseContainer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,6 +140,7 @@ type ContainerServiceServer interface {
 	CreateContainer(context.Context, *CreateContainerRequest) (*Container, error)
 	GetContainer(context.Context, *ContainerRequest) (*Container, error)
 	DeleteContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error)
+	PauseContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error)
 	StartContainer(context.Context, *ContainerRequest) (*Container, error)
 	RestartContainer(context.Context, *ContainerRequest) (*Container, error)
 	StopContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error)
@@ -150,6 +163,9 @@ func (UnimplementedContainerServiceServer) GetContainer(context.Context, *Contai
 }
 func (UnimplementedContainerServiceServer) DeleteContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteContainer not implemented")
+}
+func (UnimplementedContainerServiceServer) PauseContainer(context.Context, *ContainerRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PauseContainer not implemented")
 }
 func (UnimplementedContainerServiceServer) StartContainer(context.Context, *ContainerRequest) (*Container, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartContainer not implemented")
@@ -234,6 +250,24 @@ func _ContainerService_DeleteContainer_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ContainerServiceServer).DeleteContainer(ctx, req.(*ContainerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContainerService_PauseContainer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ContainerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContainerServiceServer).PauseContainer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContainerService_PauseContainer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContainerServiceServer).PauseContainer(ctx, req.(*ContainerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -328,6 +362,10 @@ var ContainerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteContainer",
 			Handler:    _ContainerService_DeleteContainer_Handler,
+		},
+		{
+			MethodName: "PauseContainer",
+			Handler:    _ContainerService_PauseContainer_Handler,
 		},
 		{
 			MethodName: "StartContainer",

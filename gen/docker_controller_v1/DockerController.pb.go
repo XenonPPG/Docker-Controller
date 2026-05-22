@@ -7,6 +7,8 @@
 package docker_controller_v1
 
 import (
+	compose_v1 "DockerController/gen/compose_v1"
+	container_v1 "DockerController/gen/container_v1"
 	resources_messages_v1 "DockerController/gen/resources_messages_v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -25,14 +27,13 @@ const (
 
 type DockerInfo struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ContainersRunning int32                  `protobuf:"varint,2,opt,name=containers_running,json=containersRunning,proto3" json:"containers_running,omitempty"`
-	ContainersStopped int32                  `protobuf:"varint,3,opt,name=containers_stopped,json=containersStopped,proto3" json:"containers_stopped,omitempty"`
-	ImagesCount       int32                  `protobuf:"varint,4,opt,name=images_count,json=imagesCount,proto3" json:"images_count,omitempty"`
-	Os                string                 `protobuf:"bytes,5,opt,name=os,proto3" json:"os,omitempty"`
-	Architecture      string                 `protobuf:"bytes,6,opt,name=architecture,proto3" json:"architecture,omitempty"`
-	TotalMemory       uint64                 `protobuf:"varint,7,opt,name=total_memory,json=totalMemory,proto3" json:"total_memory,omitempty"`
-	Cpus              int32                  `protobuf:"varint,8,opt,name=cpus,proto3" json:"cpus,omitempty"`
+	ContainersRunning int32                  `protobuf:"varint,1,opt,name=containers_running,json=containersRunning,proto3" json:"containers_running,omitempty"`
+	ContainersStopped int32                  `protobuf:"varint,2,opt,name=containers_stopped,json=containersStopped,proto3" json:"containers_stopped,omitempty"`
+	ImagesCount       int32                  `protobuf:"varint,3,opt,name=images_count,json=imagesCount,proto3" json:"images_count,omitempty"`
+	Os                string                 `protobuf:"bytes,4,opt,name=os,proto3" json:"os,omitempty"`
+	Architecture      string                 `protobuf:"bytes,5,opt,name=architecture,proto3" json:"architecture,omitempty"`
+	TotalMemory       uint64                 `protobuf:"varint,6,opt,name=total_memory,json=totalMemory,proto3" json:"total_memory,omitempty"`
+	Cpus              int32                  `protobuf:"varint,7,opt,name=cpus,proto3" json:"cpus,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -65,13 +66,6 @@ func (x *DockerInfo) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DockerInfo.ProtoReflect.Descriptor instead.
 func (*DockerInfo) Descriptor() ([]byte, []int) {
 	return file_proto_DockerController_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *DockerInfo) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
 }
 
 func (x *DockerInfo) GetContainersRunning() int32 {
@@ -123,66 +117,6 @@ func (x *DockerInfo) GetCpus() int32 {
 	return 0
 }
 
-type DockerVersion struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	ApiVersion    string                 `protobuf:"bytes,2,opt,name=api_version,json=apiVersion,proto3" json:"api_version,omitempty"`
-	GoVersion     string                 `protobuf:"bytes,3,opt,name=go_version,json=goVersion,proto3" json:"go_version,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DockerVersion) Reset() {
-	*x = DockerVersion{}
-	mi := &file_proto_DockerController_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DockerVersion) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DockerVersion) ProtoMessage() {}
-
-func (x *DockerVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_DockerController_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DockerVersion.ProtoReflect.Descriptor instead.
-func (*DockerVersion) Descriptor() ([]byte, []int) {
-	return file_proto_DockerController_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *DockerVersion) GetVersion() string {
-	if x != nil {
-		return x.Version
-	}
-	return ""
-}
-
-func (x *DockerVersion) GetApiVersion() string {
-	if x != nil {
-		return x.ApiVersion
-	}
-	return ""
-}
-
-func (x *DockerVersion) GetGoVersion() string {
-	if x != nil {
-		return x.GoVersion
-	}
-	return ""
-}
-
 type StreamEventsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Types         []string               `protobuf:"bytes,1,rep,name=types,proto3" json:"types,omitempty"`
@@ -193,7 +127,7 @@ type StreamEventsRequest struct {
 
 func (x *StreamEventsRequest) Reset() {
 	*x = StreamEventsRequest{}
-	mi := &file_proto_DockerController_proto_msgTypes[2]
+	mi := &file_proto_DockerController_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -205,7 +139,7 @@ func (x *StreamEventsRequest) String() string {
 func (*StreamEventsRequest) ProtoMessage() {}
 
 func (x *StreamEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_DockerController_proto_msgTypes[2]
+	mi := &file_proto_DockerController_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -218,7 +152,7 @@ func (x *StreamEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamEventsRequest.ProtoReflect.Descriptor instead.
 func (*StreamEventsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_DockerController_proto_rawDescGZIP(), []int{2}
+	return file_proto_DockerController_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *StreamEventsRequest) GetTypes() []string {
@@ -249,7 +183,7 @@ type Event struct {
 
 func (x *Event) Reset() {
 	*x = Event{}
-	mi := &file_proto_DockerController_proto_msgTypes[3]
+	mi := &file_proto_DockerController_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +195,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_DockerController_proto_msgTypes[3]
+	mi := &file_proto_DockerController_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +208,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_proto_DockerController_proto_rawDescGZIP(), []int{3}
+	return file_proto_DockerController_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Event) GetType() string {
@@ -319,27 +253,108 @@ func (x *Event) GetAttributes() map[string]string {
 	return nil
 }
 
+type ListContainersResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Containers    []*container_v1.Container `protobuf:"bytes,1,rep,name=containers,proto3" json:"containers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListContainersResponse) Reset() {
+	*x = ListContainersResponse{}
+	mi := &file_proto_DockerController_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListContainersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListContainersResponse) ProtoMessage() {}
+
+func (x *ListContainersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_DockerController_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListContainersResponse.ProtoReflect.Descriptor instead.
+func (*ListContainersResponse) Descriptor() ([]byte, []int) {
+	return file_proto_DockerController_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListContainersResponse) GetContainers() []*container_v1.Container {
+	if x != nil {
+		return x.Containers
+	}
+	return nil
+}
+
+type ListProjectsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Projects      []*compose_v1.Project  `protobuf:"bytes,1,rep,name=projects,proto3" json:"projects,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListProjectsResponse) Reset() {
+	*x = ListProjectsResponse{}
+	mi := &file_proto_DockerController_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListProjectsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListProjectsResponse) ProtoMessage() {}
+
+func (x *ListProjectsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_DockerController_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListProjectsResponse.ProtoReflect.Descriptor instead.
+func (*ListProjectsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_DockerController_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListProjectsResponse) GetProjects() []*compose_v1.Project {
+	if x != nil {
+		return x.Projects
+	}
+	return nil
+}
+
 var File_proto_DockerController_proto protoreflect.FileDescriptor
 
 const file_proto_DockerController_proto_rawDesc = "" +
 	"\n" +
-	"\x1cproto/DockerController.proto\x12\x10DockerController\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1eproto/resources.messages.proto\"\x88\x02\n" +
+	"\x1cproto/DockerController.proto\x12\x10DockerController\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1eproto/resources.messages.proto\x1a\x15proto/container.proto\x1a\x13proto/compose.proto\"\xf8\x01\n" +
 	"\n" +
-	"DockerInfo\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12-\n" +
-	"\x12containers_running\x18\x02 \x01(\x05R\x11containersRunning\x12-\n" +
-	"\x12containers_stopped\x18\x03 \x01(\x05R\x11containersStopped\x12!\n" +
-	"\fimages_count\x18\x04 \x01(\x05R\vimagesCount\x12\x0e\n" +
-	"\x02os\x18\x05 \x01(\tR\x02os\x12\"\n" +
-	"\farchitecture\x18\x06 \x01(\tR\farchitecture\x12!\n" +
-	"\ftotal_memory\x18\a \x01(\x04R\vtotalMemory\x12\x12\n" +
-	"\x04cpus\x18\b \x01(\x05R\x04cpus\"i\n" +
-	"\rDockerVersion\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12\x1f\n" +
-	"\vapi_version\x18\x02 \x01(\tR\n" +
-	"apiVersion\x12\x1d\n" +
-	"\n" +
-	"go_version\x18\x03 \x01(\tR\tgoVersion\"E\n" +
+	"DockerInfo\x12-\n" +
+	"\x12containers_running\x18\x01 \x01(\x05R\x11containersRunning\x12-\n" +
+	"\x12containers_stopped\x18\x02 \x01(\x05R\x11containersStopped\x12!\n" +
+	"\fimages_count\x18\x03 \x01(\x05R\vimagesCount\x12\x0e\n" +
+	"\x02os\x18\x04 \x01(\tR\x02os\x12\"\n" +
+	"\farchitecture\x18\x05 \x01(\tR\farchitecture\x12!\n" +
+	"\ftotal_memory\x18\x06 \x01(\x04R\vtotalMemory\x12\x12\n" +
+	"\x04cpus\x18\a \x01(\x05R\x04cpus\"E\n" +
 	"\x13StreamEventsRequest\x12\x14\n" +
 	"\x05types\x18\x01 \x03(\tR\x05types\x12\x18\n" +
 	"\aactions\x18\x02 \x03(\tR\aactions\"\x89\x02\n" +
@@ -355,14 +370,20 @@ const file_proto_DockerController_proto_rawDesc = "" +
 	"attributes\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xee\x02\n" +
-	"\rDockerService\x12?\n" +
-	"\aGetInfo\x12\x16.google.protobuf.Empty\x1a\x1c.DockerController.DockerInfo\x12E\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"U\n" +
+	"\x16ListContainersResponse\x12;\n" +
 	"\n" +
-	"GetVersion\x12\x16.google.protobuf.Empty\x1a\x1f.DockerController.DockerVersion\x12K\n" +
+	"containers\x18\x01 \x03(\v2\x1b.DockerController.ContainerR\n" +
+	"containers\"M\n" +
+	"\x14ListProjectsResponse\x125\n" +
+	"\bprojects\x18\x01 \x03(\v2\x19.DockerController.ProjectR\bprojects2\xcb\x03\n" +
+	"\rDockerService\x12?\n" +
+	"\aGetInfo\x12\x16.google.protobuf.Empty\x1a\x1c.DockerController.DockerInfo\x12K\n" +
 	"\x10GetResourceUsage\x12\x16.google.protobuf.Empty\x1a\x1f.DockerController.ResourceUsage\x12P\n" +
 	"\fStreamEvents\x12%.DockerController.StreamEventsRequest\x1a\x17.DockerController.Event0\x01\x126\n" +
-	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB+Z)DockerController/gen/docker_controller_v1b\x06proto3"
+	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12R\n" +
+	"\x0eListContainers\x12\x16.google.protobuf.Empty\x1a(.DockerController.ListContainersResponse\x12N\n" +
+	"\fListProjects\x12\x16.google.protobuf.Empty\x1a&.DockerController.ListProjectsResponseB+Z)DockerController/gen/docker_controller_v1b\x06proto3"
 
 var (
 	file_proto_DockerController_proto_rawDescOnce sync.Once
@@ -376,33 +397,40 @@ func file_proto_DockerController_proto_rawDescGZIP() []byte {
 	return file_proto_DockerController_proto_rawDescData
 }
 
-var file_proto_DockerController_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_DockerController_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_DockerController_proto_goTypes = []any{
-	(*DockerInfo)(nil),          // 0: DockerController.DockerInfo
-	(*DockerVersion)(nil),       // 1: DockerController.DockerVersion
-	(*StreamEventsRequest)(nil), // 2: DockerController.StreamEventsRequest
-	(*Event)(nil),               // 3: DockerController.Event
-	nil,                         // 4: DockerController.Event.AttributesEntry
-	(*emptypb.Empty)(nil),       // 5: google.protobuf.Empty
-	(*resources_messages_v1.ResourceUsage)(nil), // 6: DockerController.ResourceUsage
+	(*DockerInfo)(nil),                          // 0: DockerController.DockerInfo
+	(*StreamEventsRequest)(nil),                 // 1: DockerController.StreamEventsRequest
+	(*Event)(nil),                               // 2: DockerController.Event
+	(*ListContainersResponse)(nil),              // 3: DockerController.ListContainersResponse
+	(*ListProjectsResponse)(nil),                // 4: DockerController.ListProjectsResponse
+	nil,                                         // 5: DockerController.Event.AttributesEntry
+	(*container_v1.Container)(nil),              // 6: DockerController.Container
+	(*compose_v1.Project)(nil),                  // 7: DockerController.Project
+	(*emptypb.Empty)(nil),                       // 8: google.protobuf.Empty
+	(*resources_messages_v1.ResourceUsage)(nil), // 9: DockerController.ResourceUsage
 }
 var file_proto_DockerController_proto_depIdxs = []int32{
-	4, // 0: DockerController.Event.attributes:type_name -> DockerController.Event.AttributesEntry
-	5, // 1: DockerController.DockerService.GetInfo:input_type -> google.protobuf.Empty
-	5, // 2: DockerController.DockerService.GetVersion:input_type -> google.protobuf.Empty
-	5, // 3: DockerController.DockerService.GetResourceUsage:input_type -> google.protobuf.Empty
-	2, // 4: DockerController.DockerService.StreamEvents:input_type -> DockerController.StreamEventsRequest
-	5, // 5: DockerController.DockerService.Ping:input_type -> google.protobuf.Empty
-	0, // 6: DockerController.DockerService.GetInfo:output_type -> DockerController.DockerInfo
-	1, // 7: DockerController.DockerService.GetVersion:output_type -> DockerController.DockerVersion
-	6, // 8: DockerController.DockerService.GetResourceUsage:output_type -> DockerController.ResourceUsage
-	3, // 9: DockerController.DockerService.StreamEvents:output_type -> DockerController.Event
-	5, // 10: DockerController.DockerService.Ping:output_type -> google.protobuf.Empty
-	6, // [6:11] is the sub-list for method output_type
-	1, // [1:6] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: DockerController.Event.attributes:type_name -> DockerController.Event.AttributesEntry
+	6, // 1: DockerController.ListContainersResponse.containers:type_name -> DockerController.Container
+	7, // 2: DockerController.ListProjectsResponse.projects:type_name -> DockerController.Project
+	8, // 3: DockerController.DockerService.GetInfo:input_type -> google.protobuf.Empty
+	8, // 4: DockerController.DockerService.GetResourceUsage:input_type -> google.protobuf.Empty
+	1, // 5: DockerController.DockerService.StreamEvents:input_type -> DockerController.StreamEventsRequest
+	8, // 6: DockerController.DockerService.Ping:input_type -> google.protobuf.Empty
+	8, // 7: DockerController.DockerService.ListContainers:input_type -> google.protobuf.Empty
+	8, // 8: DockerController.DockerService.ListProjects:input_type -> google.protobuf.Empty
+	0, // 9: DockerController.DockerService.GetInfo:output_type -> DockerController.DockerInfo
+	9, // 10: DockerController.DockerService.GetResourceUsage:output_type -> DockerController.ResourceUsage
+	2, // 11: DockerController.DockerService.StreamEvents:output_type -> DockerController.Event
+	8, // 12: DockerController.DockerService.Ping:output_type -> google.protobuf.Empty
+	3, // 13: DockerController.DockerService.ListContainers:output_type -> DockerController.ListContainersResponse
+	4, // 14: DockerController.DockerService.ListProjects:output_type -> DockerController.ListProjectsResponse
+	9, // [9:15] is the sub-list for method output_type
+	3, // [3:9] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_DockerController_proto_init() }
@@ -416,7 +444,7 @@ func file_proto_DockerController_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_DockerController_proto_rawDesc), len(file_proto_DockerController_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

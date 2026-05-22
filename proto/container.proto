@@ -12,6 +12,7 @@ service ContainerService {
   rpc GetContainer(ContainerRequest) returns (Container);
   rpc DeleteContainer(ContainerRequest) returns (google.protobuf.Empty);
 
+  rpc PauseContainer(ContainerRequest) returns (google.protobuf.Empty);
   rpc StartContainer(ContainerRequest) returns (Container);
   rpc RestartContainer(ContainerRequest) returns (Container);
   rpc StopContainer(ContainerRequest) returns (google.protobuf.Empty);
@@ -24,10 +25,8 @@ message Container {
   string name = 2;
   string image = 3;
   string status = 4;
-  string state = 5;
-  int64 created_at = 6;
-  repeated string ports = 7;
-  map<string, string> labels = 8;
+  string created_at = 5;
+  map<string, string> labels = 6;
 }
 
 message CreateContainerRequest {
