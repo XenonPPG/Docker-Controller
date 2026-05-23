@@ -8,6 +8,8 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
+const ProjectLabel = "com.docker.compose.project"
+
 func (s *Server) CreateProject(ctx context.Context, req *compose.CreateProjectRequest) (*compose.Project, error) {
 	// TODO: implement
 	return nil, nil
@@ -38,7 +40,7 @@ func (s *Server) RestartProject(ctx context.Context, req *compose.ProjectRequest
 	return nil, nil
 }
 
-func (s *Server) GetProjectResourceUsage(ctx context.Context, req *compose.ProjectRequest) (*compose.GetResourceUsageResponse, error) {
+func (s *Server) GetProjectResourceUsage(ctx context.Context, req *compose.ProjectRequest) (*compose.GetProjectResourceUsageResponse, error) {
 	// TODO: implement
 	return nil, nil
 }

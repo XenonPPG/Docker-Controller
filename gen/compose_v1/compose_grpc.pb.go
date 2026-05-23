@@ -41,7 +41,7 @@ type ComposeServiceClient interface {
 	StopProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	StartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
 	RestartProject(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*Project, error)
-	GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error)
+	GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetProjectResourceUsageResponse, error)
 	GetProjectTotalResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
 }
 
@@ -113,9 +113,9 @@ func (c *composeServiceClient) RestartProject(ctx context.Context, in *ProjectRe
 	return out, nil
 }
 
-func (c *composeServiceClient) GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetResourceUsageResponse, error) {
+func (c *composeServiceClient) GetProjectResourceUsage(ctx context.Context, in *ProjectRequest, opts ...grpc.CallOption) (*GetProjectResourceUsageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResourceUsageResponse)
+	out := new(GetProjectResourceUsageResponse)
 	err := c.cc.Invoke(ctx, ComposeService_GetProjectResourceUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ type ComposeServiceServer interface {
 	StopProject(context.Context, *ProjectRequest) (*emptypb.Empty, error)
 	StartProject(context.Context, *ProjectRequest) (*Project, error)
 	RestartProject(context.Context, *ProjectRequest) (*Project, error)
-	GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error)
+	GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetProjectResourceUsageResponse, error)
 	GetProjectTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error)
 	mustEmbedUnimplementedComposeServiceServer()
 }
@@ -173,7 +173,7 @@ func (UnimplementedComposeServiceServer) StartProject(context.Context, *ProjectR
 func (UnimplementedComposeServiceServer) RestartProject(context.Context, *ProjectRequest) (*Project, error) {
 	return nil, status.Error(codes.Unimplemented, "method RestartProject not implemented")
 }
-func (UnimplementedComposeServiceServer) GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetResourceUsageResponse, error) {
+func (UnimplementedComposeServiceServer) GetProjectResourceUsage(context.Context, *ProjectRequest) (*GetProjectResourceUsageResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProjectResourceUsage not implemented")
 }
 func (UnimplementedComposeServiceServer) GetProjectTotalResourceUsage(context.Context, *ProjectRequest) (*resources_messages_v1.ResourceUsage, error) {

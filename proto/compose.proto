@@ -17,7 +17,7 @@ service ComposeService {
   rpc StartProject(ProjectRequest) returns (Project);
   rpc RestartProject(ProjectRequest) returns (Project);
 
-  rpc GetProjectResourceUsage(ProjectRequest) returns (GetResourceUsageResponse);
+  rpc GetProjectResourceUsage(ProjectRequest) returns (GetProjectResourceUsageResponse);
   rpc GetProjectTotalResourceUsage(ProjectRequest) returns (ResourceUsage);
 }
 
@@ -41,6 +41,6 @@ message ContainerWithResourceUsage {
   ResourceUsage resource_usage = 2;
 }
 
-message GetResourceUsageResponse {
+message GetProjectResourceUsageResponse {
   repeated ContainerWithResourceUsage stats = 1;
 }

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package DockerController;
+
+import "google/protobuf/empty.proto";
+import "proto/resources.messages.proto";
+import "proto/container.proto";
+import "proto/compose.proto";
+
+option go_package = "DockerController/gen/docker_controller_v1";
+
+service DockerService {
+  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+
+  rpc GetResourceUsage(google.protobuf.Empty) returns (GetResourceUsageResponse);
+  rpc GetTotalResourceUsage(google.protobuf.Empty) returns (ResourceUsage);
+
+  rpc ListContainers(google.protobuf.Empty) returns (ListContainersResponse);
+  rpc ListProjects(google.protobuf.Empty) returns (ListProjectsResponse);
+}
+
+message GetResourceUsageResponse {
+  map<string, ResourceUsageMapValue> container_usage = 1;
+}
+
+message ResourceUsageMapValue {
+  string image = 1;
+  ResourceUsage resource_usage = 2;
+}
+
+message ListContainersResponse {
+  repeated Container containers = 1;
+}
+
+message ListProjectsResponse {
+  repeated Project projects = 1;
+}

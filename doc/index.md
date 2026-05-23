@@ -3,20 +3,10 @@
 
 ## Table of Contents
 
-- [proto/DockerController.proto](#proto_DockerController-proto)
-    - [DockerInfo](#DockerController-DockerInfo)
-    - [Event](#DockerController-Event)
-    - [Event.AttributesEntry](#DockerController-Event-AttributesEntry)
-    - [ListContainersResponse](#DockerController-ListContainersResponse)
-    - [ListProjectsResponse](#DockerController-ListProjectsResponse)
-    - [StreamEventsRequest](#DockerController-StreamEventsRequest)
-  
-    - [DockerService](#DockerController-DockerService)
-  
 - [proto/compose.proto](#proto_compose-proto)
     - [ContainerWithResourceUsage](#DockerController-ContainerWithResourceUsage)
     - [CreateProjectRequest](#DockerController-CreateProjectRequest)
-    - [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse)
+    - [GetProjectResourceUsageResponse](#DockerController-GetProjectResourceUsageResponse)
     - [Project](#DockerController-Project)
     - [ProjectRequest](#DockerController-ProjectRequest)
   
@@ -30,6 +20,15 @@
   
     - [ContainerService](#DockerController-ContainerService)
   
+- [proto/docker_controller.proto](#proto_docker_controller-proto)
+    - [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse)
+    - [GetResourceUsageResponse.ContainerUsageEntry](#DockerController-GetResourceUsageResponse-ContainerUsageEntry)
+    - [ListContainersResponse](#DockerController-ListContainersResponse)
+    - [ListProjectsResponse](#DockerController-ListProjectsResponse)
+    - [ResourceUsageMapValue](#DockerController-ResourceUsageMapValue)
+  
+    - [DockerService](#DockerController-DockerService)
+  
 - [proto/resources.messages.proto](#proto_resources-messages-proto)
     - [BlockIOStats](#DockerController-BlockIOStats)
     - [CpuStats](#DockerController-CpuStats)
@@ -38,140 +37,6 @@
     - [ResourceUsage](#DockerController-ResourceUsage)
   
 - [Scalar Value Types](#scalar-value-types)
-
-
-
-<a name="proto_DockerController-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## proto/DockerController.proto
-
-
-
-<a name="DockerController-DockerInfo"></a>
-
-### DockerInfo
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| containers_running | [int32](#int32) |  |  |
-| containers_stopped | [int32](#int32) |  |  |
-| images_count | [int32](#int32) |  |  |
-| os | [string](#string) |  |  |
-| architecture | [string](#string) |  |  |
-| total_memory | [uint64](#uint64) |  |  |
-| cpus | [int32](#int32) |  |  |
-
-
-
-
-
-
-<a name="DockerController-Event"></a>
-
-### Event
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| type | [string](#string) |  |  |
-| action | [string](#string) |  |  |
-| actor_id | [string](#string) |  |  |
-| actor_name | [string](#string) |  |  |
-| time | [int64](#int64) |  |  |
-| attributes | [Event.AttributesEntry](#DockerController-Event-AttributesEntry) | repeated |  |
-
-
-
-
-
-
-<a name="DockerController-Event-AttributesEntry"></a>
-
-### Event.AttributesEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="DockerController-ListContainersResponse"></a>
-
-### ListContainersResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| containers | [Container](#DockerController-Container) | repeated |  |
-
-
-
-
-
-
-<a name="DockerController-ListProjectsResponse"></a>
-
-### ListProjectsResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| projects | [Project](#DockerController-Project) | repeated |  |
-
-
-
-
-
-
-<a name="DockerController-StreamEventsRequest"></a>
-
-### StreamEventsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| types | [string](#string) | repeated |  |
-| actions | [string](#string) | repeated |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="DockerController-DockerService"></a>
-
-### DockerService
-
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| GetInfo | [.google.protobuf.Empty](#google-protobuf-Empty) | [DockerInfo](#DockerController-DockerInfo) |  |
-| GetResourceUsage | [.google.protobuf.Empty](#google-protobuf-Empty) | [ResourceUsage](#DockerController-ResourceUsage) |  |
-| StreamEvents | [StreamEventsRequest](#DockerController-StreamEventsRequest) | [Event](#DockerController-Event) stream |  |
-| Ping | [.google.protobuf.Empty](#google-protobuf-Empty) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
-| ListContainers | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListContainersResponse](#DockerController-ListContainersResponse) |  |
-| ListProjects | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListProjectsResponse](#DockerController-ListProjectsResponse) |  |
-
- 
 
 
 
@@ -214,9 +79,9 @@
 
 
 
-<a name="DockerController-GetResourceUsageResponse"></a>
+<a name="DockerController-GetProjectResourceUsageResponse"></a>
 
-### GetResourceUsageResponse
+### GetProjectResourceUsageResponse
 
 
 
@@ -280,7 +145,7 @@
 | StopProject | [ProjectRequest](#DockerController-ProjectRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
 | StartProject | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
 | RestartProject | [ProjectRequest](#DockerController-ProjectRequest) | [Project](#DockerController-Project) |  |
-| GetProjectResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse) |  |
+| GetProjectResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [GetProjectResourceUsageResponse](#DockerController-GetProjectResourceUsageResponse) |  |
 | GetProjectTotalResourceUsage | [ProjectRequest](#DockerController-ProjectRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
 
  
@@ -382,6 +247,113 @@
 | RestartContainer | [ContainerRequest](#DockerController-ContainerRequest) | [Container](#DockerController-Container) |  |
 | StopContainer | [ContainerRequest](#DockerController-ContainerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
 | GetContainerResourceUsage | [ContainerRequest](#DockerController-ContainerRequest) | [ResourceUsage](#DockerController-ResourceUsage) |  |
+
+ 
+
+
+
+<a name="proto_docker_controller-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## proto/docker_controller.proto
+
+
+
+<a name="DockerController-GetResourceUsageResponse"></a>
+
+### GetResourceUsageResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_usage | [GetResourceUsageResponse.ContainerUsageEntry](#DockerController-GetResourceUsageResponse-ContainerUsageEntry) | repeated |  |
+
+
+
+
+
+
+<a name="DockerController-GetResourceUsageResponse-ContainerUsageEntry"></a>
+
+### GetResourceUsageResponse.ContainerUsageEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [ResourceUsageMapValue](#DockerController-ResourceUsageMapValue) |  |  |
+
+
+
+
+
+
+<a name="DockerController-ListContainersResponse"></a>
+
+### ListContainersResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| containers | [Container](#DockerController-Container) | repeated |  |
+
+
+
+
+
+
+<a name="DockerController-ListProjectsResponse"></a>
+
+### ListProjectsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| projects | [Project](#DockerController-Project) | repeated |  |
+
+
+
+
+
+
+<a name="DockerController-ResourceUsageMapValue"></a>
+
+### ResourceUsageMapValue
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| image | [string](#string) |  |  |
+| resource_usage | [ResourceUsage](#DockerController-ResourceUsage) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="DockerController-DockerService"></a>
+
+### DockerService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Ping | [.google.protobuf.Empty](#google-protobuf-Empty) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| GetResourceUsage | [.google.protobuf.Empty](#google-protobuf-Empty) | [GetResourceUsageResponse](#DockerController-GetResourceUsageResponse) |  |
+| GetTotalResourceUsage | [.google.protobuf.Empty](#google-protobuf-Empty) | [ResourceUsage](#DockerController-ResourceUsage) |  |
+| ListContainers | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListContainersResponse](#DockerController-ListContainersResponse) |  |
+| ListProjects | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListProjectsResponse](#DockerController-ListProjectsResponse) |  |
 
  
 

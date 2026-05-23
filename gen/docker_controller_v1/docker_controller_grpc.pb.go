@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             v6.31.1
-// source: proto/DockerController.proto
+// source: proto/docker_controller.proto
 
 package docker_controller_v1
 
@@ -21,22 +21,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DockerService_GetInfo_FullMethodName          = "/DockerController.DockerService/GetInfo"
-	DockerService_GetResourceUsage_FullMethodName = "/DockerController.DockerService/GetResourceUsage"
-	DockerService_StreamEvents_FullMethodName     = "/DockerController.DockerService/StreamEvents"
-	DockerService_Ping_FullMethodName             = "/DockerController.DockerService/Ping"
-	DockerService_ListContainers_FullMethodName   = "/DockerController.DockerService/ListContainers"
-	DockerService_ListProjects_FullMethodName     = "/DockerController.DockerService/ListProjects"
+	DockerService_Ping_FullMethodName                  = "/DockerController.DockerService/Ping"
+	DockerService_GetResourceUsage_FullMethodName      = "/DockerController.DockerService/GetResourceUsage"
+	DockerService_GetTotalResourceUsage_FullMethodName = "/DockerController.DockerService/GetTotalResourceUsage"
+	DockerService_ListContainers_FullMethodName        = "/DockerController.DockerService/ListContainers"
+	DockerService_ListProjects_FullMethodName          = "/DockerController.DockerService/ListProjects"
 )
 
 // DockerServiceClient is the client API for DockerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DockerServiceClient interface {
-	GetInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*DockerInfo, error)
-	GetResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
-	StreamEvents(ctx context.Context, in *StreamEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error)
 	Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResourceUsageResponse, error)
+	GetTotalResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
 	ListContainers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListContainersResponse, error)
 	ListProjects(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListProjectsResponse, error)
 }
@@ -49,19 +47,19 @@ func NewDockerServiceClient(cc grpc.ClientConnInterface) DockerServiceClient {
 	return &dockerServiceClient{cc}
 }
 
-func (c *dockerServiceClient) GetInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*DockerInfo, error) {
+func (c *dockerServiceClient) Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DockerInfo)
-	err := c.cc.Invoke(ctx, DockerService_GetInfo_FullMethodName, in, out, cOpts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DockerService_Ping_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dockerServiceClient) GetResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
+func (c *dockerServiceClient) GetResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResourceUsageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(resources_messages_v1.ResourceUsage)
+	out := new(GetResourceUsageResponse)
 	err := c.cc.Invoke(ctx, DockerService_GetResourceUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -69,29 +67,10 @@ func (c *dockerServiceClient) GetResourceUsage(ctx context.Context, in *emptypb.
 	return out, nil
 }
 
-func (c *dockerServiceClient) StreamEvents(ctx context.Context, in *StreamEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Event], error) {
+func (c *dockerServiceClient) GetTotalResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &DockerService_ServiceDesc.Streams[0], DockerService_StreamEvents_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[StreamEventsRequest, Event]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DockerService_StreamEventsClient = grpc.ServerStreamingClient[Event]
-
-func (c *dockerServiceClient) Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, DockerService_Ping_FullMethodName, in, out, cOpts...)
+	out := new(resources_messages_v1.ResourceUsage)
+	err := c.cc.Invoke(ctx, DockerService_GetTotalResourceUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,10 +101,9 @@ func (c *dockerServiceClient) ListProjects(ctx context.Context, in *emptypb.Empt
 // All implementations must embed UnimplementedDockerServiceServer
 // for forward compatibility.
 type DockerServiceServer interface {
-	GetInfo(context.Context, *emptypb.Empty) (*DockerInfo, error)
-	GetResourceUsage(context.Context, *emptypb.Empty) (*resources_messages_v1.ResourceUsage, error)
-	StreamEvents(*StreamEventsRequest, grpc.ServerStreamingServer[Event]) error
 	Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	GetResourceUsage(context.Context, *emptypb.Empty) (*GetResourceUsageResponse, error)
+	GetTotalResourceUsage(context.Context, *emptypb.Empty) (*resources_messages_v1.ResourceUsage, error)
 	ListContainers(context.Context, *emptypb.Empty) (*ListContainersResponse, error)
 	ListProjects(context.Context, *emptypb.Empty) (*ListProjectsResponse, error)
 	mustEmbedUnimplementedDockerServiceServer()
@@ -138,17 +116,14 @@ type DockerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDockerServiceServer struct{}
 
-func (UnimplementedDockerServiceServer) GetInfo(context.Context, *emptypb.Empty) (*DockerInfo, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetInfo not implemented")
-}
-func (UnimplementedDockerServiceServer) GetResourceUsage(context.Context, *emptypb.Empty) (*resources_messages_v1.ResourceUsage, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetResourceUsage not implemented")
-}
-func (UnimplementedDockerServiceServer) StreamEvents(*StreamEventsRequest, grpc.ServerStreamingServer[Event]) error {
-	return status.Error(codes.Unimplemented, "method StreamEvents not implemented")
-}
 func (UnimplementedDockerServiceServer) Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method Ping not implemented")
+}
+func (UnimplementedDockerServiceServer) GetResourceUsage(context.Context, *emptypb.Empty) (*GetResourceUsageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetResourceUsage not implemented")
+}
+func (UnimplementedDockerServiceServer) GetTotalResourceUsage(context.Context, *emptypb.Empty) (*resources_messages_v1.ResourceUsage, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTotalResourceUsage not implemented")
 }
 func (UnimplementedDockerServiceServer) ListContainers(context.Context, *emptypb.Empty) (*ListContainersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListContainers not implemented")
@@ -177,20 +152,20 @@ func RegisterDockerServiceServer(s grpc.ServiceRegistrar, srv DockerServiceServe
 	s.RegisterService(&DockerService_ServiceDesc, srv)
 }
 
-func _DockerService_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DockerService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerServiceServer).GetInfo(ctx, in)
+		return srv.(DockerServiceServer).Ping(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerService_GetInfo_FullMethodName,
+		FullMethod: DockerService_Ping_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerServiceServer).GetInfo(ctx, req.(*emptypb.Empty))
+		return srv.(DockerServiceServer).Ping(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -213,31 +188,20 @@ func _DockerService_GetResourceUsage_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DockerService_StreamEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamEventsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(DockerServiceServer).StreamEvents(m, &grpc.GenericServerStream[StreamEventsRequest, Event]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type DockerService_StreamEventsServer = grpc.ServerStreamingServer[Event]
-
-func _DockerService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DockerService_GetTotalResourceUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DockerServiceServer).Ping(ctx, in)
+		return srv.(DockerServiceServer).GetTotalResourceUsage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DockerService_Ping_FullMethodName,
+		FullMethod: DockerService_GetTotalResourceUsage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DockerServiceServer).Ping(ctx, req.(*emptypb.Empty))
+		return srv.(DockerServiceServer).GetTotalResourceUsage(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -286,16 +250,16 @@ var DockerService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DockerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetInfo",
-			Handler:    _DockerService_GetInfo_Handler,
+			MethodName: "Ping",
+			Handler:    _DockerService_Ping_Handler,
 		},
 		{
 			MethodName: "GetResourceUsage",
 			Handler:    _DockerService_GetResourceUsage_Handler,
 		},
 		{
-			MethodName: "Ping",
-			Handler:    _DockerService_Ping_Handler,
+			MethodName: "GetTotalResourceUsage",
+			Handler:    _DockerService_GetTotalResourceUsage_Handler,
 		},
 		{
 			MethodName: "ListContainers",
@@ -306,12 +270,6 @@ var DockerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DockerService_ListProjects_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "StreamEvents",
-			Handler:       _DockerService_StreamEvents_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/DockerController.proto",
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/docker_controller.proto",
 }
