@@ -96,7 +96,12 @@ func (s *Server) DeleteProject(ctx context.Context, req *compose.ProjectRequest)
 		return err
 	}, "delete project")
 
-	return &emptypb.Empty{}, err
+	_, err = s.CleanUp(ctx, &emptypb.Empty{})
+	if err != nil {
+		log.Println("failed to clean up images: ", err)
+	}
+
+	return &emptypb.Empty{}, nil
 }
 
 func (s *Server) StopProject(ctx context.Context, req *compose.ProjectRequest) (*emptypb.Empty, error) {

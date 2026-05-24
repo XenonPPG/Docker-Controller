@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"io"
+	"log"
 
 	types "github.com/moby/moby/api/types/container"
 	"github.com/moby/moby/client"
@@ -81,6 +82,12 @@ func (s *Server) DeleteContainer(ctx context.Context, req *container.ContainerRe
 	_, err := initializers.DockerClient.ContainerRemove(ctx, req.GetId(), client.ContainerRemoveOptions{
 		Force: true,
 	})
+
+	_, err = s.CleanUp(ctx, &emptypb.Empty{})
+	if err != nil {
+		log.Println("failed to clean up images: ", err)
+	}
+
 	return &emptypb.Empty{}, err
 }
 

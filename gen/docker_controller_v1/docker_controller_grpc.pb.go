@@ -26,6 +26,7 @@ const (
 	DockerService_GetTotalResourceUsage_FullMethodName = "/DockerController.DockerService/GetTotalResourceUsage"
 	DockerService_ListContainers_FullMethodName        = "/DockerController.DockerService/ListContainers"
 	DockerService_ListProjects_FullMethodName          = "/DockerController.DockerService/ListProjects"
+	DockerService_CleanUp_FullMethodName               = "/DockerController.DockerService/CleanUp"
 )
 
 // DockerServiceClient is the client API for DockerService service.
@@ -37,6 +38,7 @@ type DockerServiceClient interface {
 	GetTotalResourceUsage(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*resources_messages_v1.ResourceUsage, error)
 	ListContainers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListContainersResponse, error)
 	ListProjects(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListProjectsResponse, error)
+	CleanUp(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type dockerServiceClient struct {
@@ -97,6 +99,16 @@ func (c *dockerServiceClient) ListProjects(ctx context.Context, in *emptypb.Empt
 	return out, nil
 }
 
+func (c *dockerServiceClient) CleanUp(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DockerService_CleanUp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DockerServiceServer is the server API for DockerService service.
 // All implementations must embed UnimplementedDockerServiceServer
 // for forward compatibility.
@@ -106,6 +118,7 @@ type DockerServiceServer interface {
 	GetTotalResourceUsage(context.Context, *emptypb.Empty) (*resources_messages_v1.ResourceUsage, error)
 	ListContainers(context.Context, *emptypb.Empty) (*ListContainersResponse, error)
 	ListProjects(context.Context, *emptypb.Empty) (*ListProjectsResponse, error)
+	CleanUp(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedDockerServiceServer()
 }
 
@@ -130,6 +143,9 @@ func (UnimplementedDockerServiceServer) ListContainers(context.Context, *emptypb
 }
 func (UnimplementedDockerServiceServer) ListProjects(context.Context, *emptypb.Empty) (*ListProjectsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListProjects not implemented")
+}
+func (UnimplementedDockerServiceServer) CleanUp(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CleanUp not implemented")
 }
 func (UnimplementedDockerServiceServer) mustEmbedUnimplementedDockerServiceServer() {}
 func (UnimplementedDockerServiceServer) testEmbeddedByValue()                       {}
@@ -242,6 +258,24 @@ func _DockerService_ListProjects_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DockerService_CleanUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DockerServiceServer).CleanUp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DockerService_CleanUp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DockerServiceServer).CleanUp(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DockerService_ServiceDesc is the grpc.ServiceDesc for DockerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -268,6 +302,10 @@ var DockerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListProjects",
 			Handler:    _DockerService_ListProjects_Handler,
+		},
+		{
+			MethodName: "CleanUp",
+			Handler:    _DockerService_CleanUp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

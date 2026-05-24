@@ -8,8 +8,11 @@ import (
 	dockercontroller "DockerController/gen/docker_controller_v1"
 	resourceusage "DockerController/gen/resources_messages_v1"
 	"context"
+	"fmt"
+	"os/exec"
 	"runtime"
 	"strconv"
+	"sync"
 
 	"github.com/moby/moby/client"
 	"google.golang.org/grpc/codes"
@@ -34,24 +37,35 @@ func (s *Server) GetResourceUsage(ctx context.Context, req *emptypb.Empty) (*doc
 		return nil, status.Error(codes.Internal, "Failed to list containers: "+err.Error())
 	}
 
-	resourceMap := make(map[string]*dockercontroller.ResourceUsageMapValue)
+	waitG := sync.WaitGroup{}
+	waitG.Add(len(containers.Containers))
+
+	resourceMap := make(map[string]*resourceusage.ResourceUsageMapValue)
+	mu := sync.Mutex{}
 	for _, c := range containers.Containers {
-		res, err := s.GetContainerResourceUsage(ctx, &container.ContainerRequest{Id: c.GetId()})
-		if err != nil {
-			res = nil
-		}
-		resourceMap[c.GetId()] = &dockercontroller.ResourceUsageMapValue{
-			Image:         c.GetImage(),
-			ResourceUsage: res,
-		}
+		go func() {
+			res, err := s.GetContainerResourceUsage(ctx, &container.ContainerRequest{Id: c.GetId()})
+			if err != nil {
+				res = nil
+			}
+			mu.Lock()
+			resourceMap[c.GetId()] = &resourceusage.ResourceUsageMapValue{
+				Image:         c.GetImage(),
+				ResourceUsage: res,
+			}
+			mu.Unlock()
+			waitG.Done()
+		}()
 	}
+
+	waitG.Wait()
 
 	return &dockercontroller.GetResourceUsageResponse{
 		ContainerUsage: resourceMap,
 	}, nil
 }
 
-func (s *Server) GetTotalResourceUsage(ctx context.Context, req *emptypb.Empty) (*resourceusage.ResourceUsage, error) {
+func (s *Server) GetTotalResourceUsage(context.Context, *emptypb.Empty) (*resourceusage.ResourceUsage, error) {
 	cpuPercent, err := cpu.Percent(time.Second, false)
 	if err != nil {
 		return nil, status.Error(codes.Internal, "failed to get cpu stats: "+err.Error())
@@ -106,7 +120,7 @@ func (s *Server) GetTotalResourceUsage(ctx context.Context, req *emptypb.Empty) 
 	}, nil
 }
 
-func (s *Server) ListContainers(ctx context.Context, req *emptypb.Empty) (*dockercontroller.ListContainersResponse, error) {
+func (s *Server) ListContainers(ctx context.Context, _ *emptypb.Empty) (*dockercontroller.ListContainersResponse, error) {
 	resp, err := initializers.DockerClient.ContainerList(ctx, client.ContainerListOptions{
 		All: true,
 	})
@@ -131,7 +145,7 @@ func (s *Server) ListContainers(ctx context.Context, req *emptypb.Empty) (*docke
 	}, nil
 }
 
-func (s *Server) ListProjects(ctx context.Context, req *emptypb.Empty) (*dockercontroller.ListProjectsResponse, error) {
+func (s *Server) ListProjects(ctx context.Context, _ *emptypb.Empty) (*dockercontroller.ListProjectsResponse, error) {
 	resp, err := initializers.DockerClient.ContainerList(ctx, client.ContainerListOptions{
 		All: true,
 	})
@@ -145,13 +159,7 @@ func (s *Server) ListProjects(ctx context.Context, req *emptypb.Empty) (*dockerc
 		if !ok {
 			containers = make([]*container.Container, 0)
 		}
-		containers = append(containers, &container.Container{
-			Id:        s.ID,
-			Name:      s.Names[0][:1],
-			Image:     s.Image,
-			Status:    s.Status,
-			CreatedAt: strconv.FormatInt(s.Created, 10),
-		})
+		containers = append(containers, utils.MapSummaryToContainer(s))
 		labelsMap[s.Labels[ProjectLabel]] = containers
 	}
 
@@ -167,4 +175,14 @@ func (s *Server) ListProjects(ctx context.Context, req *emptypb.Empty) (*dockerc
 	return &dockercontroller.ListProjectsResponse{
 		Projects: projects,
 	}, nil
+}
+
+func (s *Server) CleanUp(ctx context.Context, _ *emptypb.Empty) (*emptypb.Empty, error) {
+	cmd := exec.CommandContext(ctx, "docker", "image", "prune", "-a", "-f")
+
+	if out, err := cmd.CombinedOutput(); err != nil {
+		return nil, fmt.Errorf("failed to prune images: %w\noutput: %s", err, out)
+	}
+
+	return &emptypb.Empty{}, nil
 }
