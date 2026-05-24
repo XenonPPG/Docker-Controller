@@ -17,15 +17,12 @@ service DockerService {
 
   rpc ListContainers(google.protobuf.Empty) returns (ListContainersResponse);
   rpc ListProjects(google.protobuf.Empty) returns (ListProjectsResponse);
+
+  rpc CleanUp(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
 message GetResourceUsageResponse {
   map<string, ResourceUsageMapValue> container_usage = 1;
-}
-
-message ResourceUsageMapValue {
-  string image = 1;
-  ResourceUsage resource_usage = 2;
 }
 
 message ListContainersResponse {

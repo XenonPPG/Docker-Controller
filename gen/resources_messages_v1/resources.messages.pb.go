@@ -313,6 +313,58 @@ func (x *BlockIOStats) GetWriteBytes() uint64 {
 	return 0
 }
 
+type ResourceUsageMapValue struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Image         string                 `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
+	ResourceUsage *ResourceUsage         `protobuf:"bytes,2,opt,name=resource_usage,json=resourceUsage,proto3" json:"resource_usage,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceUsageMapValue) Reset() {
+	*x = ResourceUsageMapValue{}
+	mi := &file_proto_resources_messages_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceUsageMapValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceUsageMapValue) ProtoMessage() {}
+
+func (x *ResourceUsageMapValue) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_resources_messages_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceUsageMapValue.ProtoReflect.Descriptor instead.
+func (*ResourceUsageMapValue) Descriptor() ([]byte, []int) {
+	return file_proto_resources_messages_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ResourceUsageMapValue) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *ResourceUsageMapValue) GetResourceUsage() *ResourceUsage {
+	if x != nil {
+		return x.ResourceUsage
+	}
+	return nil
+}
+
 var File_proto_resources_messages_proto protoreflect.FileDescriptor
 
 const file_proto_resources_messages_proto_rawDesc = "" +
@@ -339,7 +391,10 @@ const file_proto_resources_messages_proto_rawDesc = "" +
 	"\n" +
 	"read_bytes\x18\x01 \x01(\x04R\treadBytes\x12\x1f\n" +
 	"\vwrite_bytes\x18\x02 \x01(\x04R\n" +
-	"writeBytesB,Z*DockerController/gen/resources_messages_v1b\x06proto3"
+	"writeBytes\"u\n" +
+	"\x15ResourceUsageMapValue\x12\x14\n" +
+	"\x05image\x18\x01 \x01(\tR\x05image\x12F\n" +
+	"\x0eresource_usage\x18\x02 \x01(\v2\x1f.DockerController.ResourceUsageR\rresourceUsageB,Z*DockerController/gen/resources_messages_v1b\x06proto3"
 
 var (
 	file_proto_resources_messages_proto_rawDescOnce sync.Once
@@ -353,24 +408,26 @@ func file_proto_resources_messages_proto_rawDescGZIP() []byte {
 	return file_proto_resources_messages_proto_rawDescData
 }
 
-var file_proto_resources_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_resources_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_resources_messages_proto_goTypes = []any{
-	(*ResourceUsage)(nil), // 0: DockerController.ResourceUsage
-	(*CpuStats)(nil),      // 1: DockerController.CpuStats
-	(*MemoryStats)(nil),   // 2: DockerController.MemoryStats
-	(*NetworkStats)(nil),  // 3: DockerController.NetworkStats
-	(*BlockIOStats)(nil),  // 4: DockerController.BlockIOStats
+	(*ResourceUsage)(nil),         // 0: DockerController.ResourceUsage
+	(*CpuStats)(nil),              // 1: DockerController.CpuStats
+	(*MemoryStats)(nil),           // 2: DockerController.MemoryStats
+	(*NetworkStats)(nil),          // 3: DockerController.NetworkStats
+	(*BlockIOStats)(nil),          // 4: DockerController.BlockIOStats
+	(*ResourceUsageMapValue)(nil), // 5: DockerController.ResourceUsageMapValue
 }
 var file_proto_resources_messages_proto_depIdxs = []int32{
 	1, // 0: DockerController.ResourceUsage.cpu:type_name -> DockerController.CpuStats
 	2, // 1: DockerController.ResourceUsage.memory:type_name -> DockerController.MemoryStats
 	3, // 2: DockerController.ResourceUsage.networks:type_name -> DockerController.NetworkStats
 	4, // 3: DockerController.ResourceUsage.block_io:type_name -> DockerController.BlockIOStats
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0, // 4: DockerController.ResourceUsageMapValue.resource_usage:type_name -> DockerController.ResourceUsage
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_proto_resources_messages_proto_init() }
@@ -384,7 +441,7 @@ func file_proto_resources_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_resources_messages_proto_rawDesc), len(file_proto_resources_messages_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

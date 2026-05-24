@@ -28,7 +28,7 @@ message Project {
 }
 
 message ProjectRequest {
-  string id = 1;
+  string name = 1;
 }
 
 message CreateProjectRequest {
@@ -36,11 +36,6 @@ message CreateProjectRequest {
   string compose_file = 2;
 }
 
-message ContainerWithResourceUsage {
-  Container container = 1;
-  ResourceUsage resource_usage = 2;
-}
-
 message GetProjectResourceUsageResponse {
-  repeated ContainerWithResourceUsage stats = 1;
+  map<string, ResourceUsageMapValue> stats = 1;
 }

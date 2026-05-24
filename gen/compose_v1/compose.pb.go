@@ -86,7 +86,7 @@ func (x *Project) GetContainers() []*container_v1.Container {
 
 type ProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -121,9 +121,9 @@ func (*ProjectRequest) Descriptor() ([]byte, []int) {
 	return file_proto_compose_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ProjectRequest) GetId() string {
+func (x *ProjectRequest) GetName() string {
 	if x != nil {
-		return x.Id
+		return x.Name
 	}
 	return ""
 }
@@ -180,68 +180,16 @@ func (x *CreateProjectRequest) GetComposeFile() string {
 	return ""
 }
 
-type ContainerWithResourceUsage struct {
-	state         protoimpl.MessageState               `protogen:"open.v1"`
-	Container     *container_v1.Container              `protobuf:"bytes,1,opt,name=container,proto3" json:"container,omitempty"`
-	ResourceUsage *resources_messages_v1.ResourceUsage `protobuf:"bytes,2,opt,name=resource_usage,json=resourceUsage,proto3" json:"resource_usage,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ContainerWithResourceUsage) Reset() {
-	*x = ContainerWithResourceUsage{}
-	mi := &file_proto_compose_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ContainerWithResourceUsage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ContainerWithResourceUsage) ProtoMessage() {}
-
-func (x *ContainerWithResourceUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_compose_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ContainerWithResourceUsage.ProtoReflect.Descriptor instead.
-func (*ContainerWithResourceUsage) Descriptor() ([]byte, []int) {
-	return file_proto_compose_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ContainerWithResourceUsage) GetContainer() *container_v1.Container {
-	if x != nil {
-		return x.Container
-	}
-	return nil
-}
-
-func (x *ContainerWithResourceUsage) GetResourceUsage() *resources_messages_v1.ResourceUsage {
-	if x != nil {
-		return x.ResourceUsage
-	}
-	return nil
-}
-
 type GetProjectResourceUsageResponse struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Stats         []*ContainerWithResourceUsage `protobuf:"bytes,1,rep,name=stats,proto3" json:"stats,omitempty"`
+	state         protoimpl.MessageState                                  `protogen:"open.v1"`
+	Stats         map[string]*resources_messages_v1.ResourceUsageMapValue `protobuf:"bytes,1,rep,name=stats,proto3" json:"stats,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetProjectResourceUsageResponse) Reset() {
 	*x = GetProjectResourceUsageResponse{}
-	mi := &file_proto_compose_proto_msgTypes[4]
+	mi := &file_proto_compose_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -253,7 +201,7 @@ func (x *GetProjectResourceUsageResponse) String() string {
 func (*GetProjectResourceUsageResponse) ProtoMessage() {}
 
 func (x *GetProjectResourceUsageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_compose_proto_msgTypes[4]
+	mi := &file_proto_compose_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -266,10 +214,10 @@ func (x *GetProjectResourceUsageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProjectResourceUsageResponse.ProtoReflect.Descriptor instead.
 func (*GetProjectResourceUsageResponse) Descriptor() ([]byte, []int) {
-	return file_proto_compose_proto_rawDescGZIP(), []int{4}
+	return file_proto_compose_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetProjectResourceUsageResponse) GetStats() []*ContainerWithResourceUsage {
+func (x *GetProjectResourceUsageResponse) GetStats() map[string]*resources_messages_v1.ResourceUsageMapValue {
 	if x != nil {
 		return x.Stats
 	}
@@ -286,17 +234,18 @@ const file_proto_compose_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12;\n" +
 	"\n" +
 	"containers\x18\x03 \x03(\v2\x1b.DockerController.ContainerR\n" +
-	"containers\" \n" +
-	"\x0eProjectRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"M\n" +
+	"containers\"$\n" +
+	"\x0eProjectRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"M\n" +
 	"\x14CreateProjectRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
-	"\fcompose_file\x18\x02 \x01(\tR\vcomposeFile\"\x9f\x01\n" +
-	"\x1aContainerWithResourceUsage\x129\n" +
-	"\tcontainer\x18\x01 \x01(\v2\x1b.DockerController.ContainerR\tcontainer\x12F\n" +
-	"\x0eresource_usage\x18\x02 \x01(\v2\x1f.DockerController.ResourceUsageR\rresourceUsage\"e\n" +
-	"\x1fGetProjectResourceUsageResponse\x12B\n" +
-	"\x05stats\x18\x01 \x03(\v2,.DockerController.ContainerWithResourceUsageR\x05stats2\xb2\x05\n" +
+	"\fcompose_file\x18\x02 \x01(\tR\vcomposeFile\"\xd8\x01\n" +
+	"\x1fGetProjectResourceUsageResponse\x12R\n" +
+	"\x05stats\x18\x01 \x03(\v2<.DockerController.GetProjectResourceUsageResponse.StatsEntryR\x05stats\x1aa\n" +
+	"\n" +
+	"StatsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12=\n" +
+	"\x05value\x18\x02 \x01(\v2'.DockerController.ResourceUsageMapValueR\x05value:\x028\x012\xb2\x05\n" +
 	"\x0eComposeService\x12R\n" +
 	"\rCreateProject\x12&.DockerController.CreateProjectRequest\x1a\x19.DockerController.Project\x12I\n" +
 	"\n" +
@@ -322,41 +271,41 @@ func file_proto_compose_proto_rawDescGZIP() []byte {
 
 var file_proto_compose_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_compose_proto_goTypes = []any{
-	(*Project)(nil),                             // 0: DockerController.Project
-	(*ProjectRequest)(nil),                      // 1: DockerController.ProjectRequest
-	(*CreateProjectRequest)(nil),                // 2: DockerController.CreateProjectRequest
-	(*ContainerWithResourceUsage)(nil),          // 3: DockerController.ContainerWithResourceUsage
-	(*GetProjectResourceUsageResponse)(nil),     // 4: DockerController.GetProjectResourceUsageResponse
-	(*container_v1.Container)(nil),              // 5: DockerController.Container
-	(*resources_messages_v1.ResourceUsage)(nil), // 6: DockerController.ResourceUsage
-	(*emptypb.Empty)(nil),                       // 7: google.protobuf.Empty
+	(*Project)(nil),                         // 0: DockerController.Project
+	(*ProjectRequest)(nil),                  // 1: DockerController.ProjectRequest
+	(*CreateProjectRequest)(nil),            // 2: DockerController.CreateProjectRequest
+	(*GetProjectResourceUsageResponse)(nil), // 3: DockerController.GetProjectResourceUsageResponse
+	nil,                                     // 4: DockerController.GetProjectResourceUsageResponse.StatsEntry
+	(*container_v1.Container)(nil),          // 5: DockerController.Container
+	(*resources_messages_v1.ResourceUsageMapValue)(nil), // 6: DockerController.ResourceUsageMapValue
+	(*emptypb.Empty)(nil),                               // 7: google.protobuf.Empty
+	(*resources_messages_v1.ResourceUsage)(nil),         // 8: DockerController.ResourceUsage
 }
 var file_proto_compose_proto_depIdxs = []int32{
 	5,  // 0: DockerController.Project.containers:type_name -> DockerController.Container
-	5,  // 1: DockerController.ContainerWithResourceUsage.container:type_name -> DockerController.Container
-	6,  // 2: DockerController.ContainerWithResourceUsage.resource_usage:type_name -> DockerController.ResourceUsage
-	3,  // 3: DockerController.GetProjectResourceUsageResponse.stats:type_name -> DockerController.ContainerWithResourceUsage
-	2,  // 4: DockerController.ComposeService.CreateProject:input_type -> DockerController.CreateProjectRequest
-	1,  // 5: DockerController.ComposeService.GetProject:input_type -> DockerController.ProjectRequest
-	1,  // 6: DockerController.ComposeService.DeleteProject:input_type -> DockerController.ProjectRequest
-	1,  // 7: DockerController.ComposeService.StopProject:input_type -> DockerController.ProjectRequest
-	1,  // 8: DockerController.ComposeService.StartProject:input_type -> DockerController.ProjectRequest
-	1,  // 9: DockerController.ComposeService.RestartProject:input_type -> DockerController.ProjectRequest
-	1,  // 10: DockerController.ComposeService.GetProjectResourceUsage:input_type -> DockerController.ProjectRequest
-	1,  // 11: DockerController.ComposeService.GetProjectTotalResourceUsage:input_type -> DockerController.ProjectRequest
-	0,  // 12: DockerController.ComposeService.CreateProject:output_type -> DockerController.Project
-	0,  // 13: DockerController.ComposeService.GetProject:output_type -> DockerController.Project
-	7,  // 14: DockerController.ComposeService.DeleteProject:output_type -> google.protobuf.Empty
-	7,  // 15: DockerController.ComposeService.StopProject:output_type -> google.protobuf.Empty
-	0,  // 16: DockerController.ComposeService.StartProject:output_type -> DockerController.Project
-	0,  // 17: DockerController.ComposeService.RestartProject:output_type -> DockerController.Project
-	4,  // 18: DockerController.ComposeService.GetProjectResourceUsage:output_type -> DockerController.GetProjectResourceUsageResponse
-	6,  // 19: DockerController.ComposeService.GetProjectTotalResourceUsage:output_type -> DockerController.ResourceUsage
-	12, // [12:20] is the sub-list for method output_type
-	4,  // [4:12] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	4,  // 1: DockerController.GetProjectResourceUsageResponse.stats:type_name -> DockerController.GetProjectResourceUsageResponse.StatsEntry
+	6,  // 2: DockerController.GetProjectResourceUsageResponse.StatsEntry.value:type_name -> DockerController.ResourceUsageMapValue
+	2,  // 3: DockerController.ComposeService.CreateProject:input_type -> DockerController.CreateProjectRequest
+	1,  // 4: DockerController.ComposeService.GetProject:input_type -> DockerController.ProjectRequest
+	1,  // 5: DockerController.ComposeService.DeleteProject:input_type -> DockerController.ProjectRequest
+	1,  // 6: DockerController.ComposeService.StopProject:input_type -> DockerController.ProjectRequest
+	1,  // 7: DockerController.ComposeService.StartProject:input_type -> DockerController.ProjectRequest
+	1,  // 8: DockerController.ComposeService.RestartProject:input_type -> DockerController.ProjectRequest
+	1,  // 9: DockerController.ComposeService.GetProjectResourceUsage:input_type -> DockerController.ProjectRequest
+	1,  // 10: DockerController.ComposeService.GetProjectTotalResourceUsage:input_type -> DockerController.ProjectRequest
+	0,  // 11: DockerController.ComposeService.CreateProject:output_type -> DockerController.Project
+	0,  // 12: DockerController.ComposeService.GetProject:output_type -> DockerController.Project
+	7,  // 13: DockerController.ComposeService.DeleteProject:output_type -> google.protobuf.Empty
+	7,  // 14: DockerController.ComposeService.StopProject:output_type -> google.protobuf.Empty
+	0,  // 15: DockerController.ComposeService.StartProject:output_type -> DockerController.Project
+	0,  // 16: DockerController.ComposeService.RestartProject:output_type -> DockerController.Project
+	3,  // 17: DockerController.ComposeService.GetProjectResourceUsage:output_type -> DockerController.GetProjectResourceUsageResponse
+	8,  // 18: DockerController.ComposeService.GetProjectTotalResourceUsage:output_type -> DockerController.ResourceUsage
+	11, // [11:19] is the sub-list for method output_type
+	3,  // [3:11] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_compose_proto_init() }

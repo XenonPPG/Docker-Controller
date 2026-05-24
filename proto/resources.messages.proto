@@ -32,3 +32,8 @@ message BlockIOStats {
   uint64 read_bytes = 1;
   uint64 write_bytes = 2;
 }
+
+message ResourceUsageMapValue {
+  string image = 1;
+  ResourceUsage resource_usage = 2;
+}

@@ -26,8 +26,8 @@ const (
 )
 
 type GetResourceUsageResponse struct {
-	state          protoimpl.MessageState            `protogen:"open.v1"`
-	ContainerUsage map[string]*ResourceUsageMapValue `protobuf:"bytes,1,rep,name=container_usage,json=containerUsage,proto3" json:"container_usage,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state          protoimpl.MessageState                                  `protogen:"open.v1"`
+	ContainerUsage map[string]*resources_messages_v1.ResourceUsageMapValue `protobuf:"bytes,1,rep,name=container_usage,json=containerUsage,proto3" json:"container_usage,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -62,61 +62,9 @@ func (*GetResourceUsageResponse) Descriptor() ([]byte, []int) {
 	return file_proto_docker_controller_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetResourceUsageResponse) GetContainerUsage() map[string]*ResourceUsageMapValue {
+func (x *GetResourceUsageResponse) GetContainerUsage() map[string]*resources_messages_v1.ResourceUsageMapValue {
 	if x != nil {
 		return x.ContainerUsage
-	}
-	return nil
-}
-
-type ResourceUsageMapValue struct {
-	state         protoimpl.MessageState               `protogen:"open.v1"`
-	Image         string                               `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
-	ResourceUsage *resources_messages_v1.ResourceUsage `protobuf:"bytes,2,opt,name=resource_usage,json=resourceUsage,proto3" json:"resource_usage,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResourceUsageMapValue) Reset() {
-	*x = ResourceUsageMapValue{}
-	mi := &file_proto_docker_controller_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResourceUsageMapValue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResourceUsageMapValue) ProtoMessage() {}
-
-func (x *ResourceUsageMapValue) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_docker_controller_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResourceUsageMapValue.ProtoReflect.Descriptor instead.
-func (*ResourceUsageMapValue) Descriptor() ([]byte, []int) {
-	return file_proto_docker_controller_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ResourceUsageMapValue) GetImage() string {
-	if x != nil {
-		return x.Image
-	}
-	return ""
-}
-
-func (x *ResourceUsageMapValue) GetResourceUsage() *resources_messages_v1.ResourceUsage {
-	if x != nil {
-		return x.ResourceUsage
 	}
 	return nil
 }
@@ -130,7 +78,7 @@ type ListContainersResponse struct {
 
 func (x *ListContainersResponse) Reset() {
 	*x = ListContainersResponse{}
-	mi := &file_proto_docker_controller_proto_msgTypes[2]
+	mi := &file_proto_docker_controller_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -142,7 +90,7 @@ func (x *ListContainersResponse) String() string {
 func (*ListContainersResponse) ProtoMessage() {}
 
 func (x *ListContainersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_docker_controller_proto_msgTypes[2]
+	mi := &file_proto_docker_controller_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -155,7 +103,7 @@ func (x *ListContainersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListContainersResponse.ProtoReflect.Descriptor instead.
 func (*ListContainersResponse) Descriptor() ([]byte, []int) {
-	return file_proto_docker_controller_proto_rawDescGZIP(), []int{2}
+	return file_proto_docker_controller_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListContainersResponse) GetContainers() []*container_v1.Container {
@@ -174,7 +122,7 @@ type ListProjectsResponse struct {
 
 func (x *ListProjectsResponse) Reset() {
 	*x = ListProjectsResponse{}
-	mi := &file_proto_docker_controller_proto_msgTypes[3]
+	mi := &file_proto_docker_controller_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -186,7 +134,7 @@ func (x *ListProjectsResponse) String() string {
 func (*ListProjectsResponse) ProtoMessage() {}
 
 func (x *ListProjectsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_docker_controller_proto_msgTypes[3]
+	mi := &file_proto_docker_controller_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -199,7 +147,7 @@ func (x *ListProjectsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListProjectsResponse.ProtoReflect.Descriptor instead.
 func (*ListProjectsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_docker_controller_proto_rawDescGZIP(), []int{3}
+	return file_proto_docker_controller_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListProjectsResponse) GetProjects() []*compose_v1.Project {
@@ -218,22 +166,20 @@ const file_proto_docker_controller_proto_rawDesc = "" +
 	"\x0fcontainer_usage\x18\x01 \x03(\v2>.DockerController.GetResourceUsageResponse.ContainerUsageEntryR\x0econtainerUsage\x1aj\n" +
 	"\x13ContainerUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12=\n" +
-	"\x05value\x18\x02 \x01(\v2'.DockerController.ResourceUsageMapValueR\x05value:\x028\x01\"u\n" +
-	"\x15ResourceUsageMapValue\x12\x14\n" +
-	"\x05image\x18\x01 \x01(\tR\x05image\x12F\n" +
-	"\x0eresource_usage\x18\x02 \x01(\v2\x1f.DockerController.ResourceUsageR\rresourceUsage\"U\n" +
+	"\x05value\x18\x02 \x01(\v2'.DockerController.ResourceUsageMapValueR\x05value:\x028\x01\"U\n" +
 	"\x16ListContainersResponse\x12;\n" +
 	"\n" +
 	"containers\x18\x01 \x03(\v2\x1b.DockerController.ContainerR\n" +
 	"containers\"M\n" +
 	"\x14ListProjectsResponse\x125\n" +
-	"\bprojects\x18\x01 \x03(\v2\x19.DockerController.ProjectR\bprojects2\x95\x03\n" +
+	"\bprojects\x18\x01 \x03(\v2\x19.DockerController.ProjectR\bprojects2\xd0\x03\n" +
 	"\rDockerService\x126\n" +
 	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12V\n" +
 	"\x10GetResourceUsage\x12\x16.google.protobuf.Empty\x1a*.DockerController.GetResourceUsageResponse\x12P\n" +
 	"\x15GetTotalResourceUsage\x12\x16.google.protobuf.Empty\x1a\x1f.DockerController.ResourceUsage\x12R\n" +
 	"\x0eListContainers\x12\x16.google.protobuf.Empty\x1a(.DockerController.ListContainersResponse\x12N\n" +
-	"\fListProjects\x12\x16.google.protobuf.Empty\x1a&.DockerController.ListProjectsResponseB+Z)DockerController/gen/docker_controller_v1b\x06proto3"
+	"\fListProjects\x12\x16.google.protobuf.Empty\x1a&.DockerController.ListProjectsResponse\x129\n" +
+	"\aCleanUp\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB+Z)DockerController/gen/docker_controller_v1b\x06proto3"
 
 var (
 	file_proto_docker_controller_proto_rawDescOnce sync.Once
@@ -247,39 +193,40 @@ func file_proto_docker_controller_proto_rawDescGZIP() []byte {
 	return file_proto_docker_controller_proto_rawDescData
 }
 
-var file_proto_docker_controller_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_docker_controller_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_docker_controller_proto_goTypes = []any{
-	(*GetResourceUsageResponse)(nil),            // 0: DockerController.GetResourceUsageResponse
-	(*ResourceUsageMapValue)(nil),               // 1: DockerController.ResourceUsageMapValue
-	(*ListContainersResponse)(nil),              // 2: DockerController.ListContainersResponse
-	(*ListProjectsResponse)(nil),                // 3: DockerController.ListProjectsResponse
-	nil,                                         // 4: DockerController.GetResourceUsageResponse.ContainerUsageEntry
-	(*resources_messages_v1.ResourceUsage)(nil), // 5: DockerController.ResourceUsage
-	(*container_v1.Container)(nil),              // 6: DockerController.Container
-	(*compose_v1.Project)(nil),                  // 7: DockerController.Project
-	(*emptypb.Empty)(nil),                       // 8: google.protobuf.Empty
+	(*GetResourceUsageResponse)(nil), // 0: DockerController.GetResourceUsageResponse
+	(*ListContainersResponse)(nil),   // 1: DockerController.ListContainersResponse
+	(*ListProjectsResponse)(nil),     // 2: DockerController.ListProjectsResponse
+	nil,                              // 3: DockerController.GetResourceUsageResponse.ContainerUsageEntry
+	(*container_v1.Container)(nil),   // 4: DockerController.Container
+	(*compose_v1.Project)(nil),       // 5: DockerController.Project
+	(*resources_messages_v1.ResourceUsageMapValue)(nil), // 6: DockerController.ResourceUsageMapValue
+	(*emptypb.Empty)(nil),                               // 7: google.protobuf.Empty
+	(*resources_messages_v1.ResourceUsage)(nil),         // 8: DockerController.ResourceUsage
 }
 var file_proto_docker_controller_proto_depIdxs = []int32{
-	4,  // 0: DockerController.GetResourceUsageResponse.container_usage:type_name -> DockerController.GetResourceUsageResponse.ContainerUsageEntry
-	5,  // 1: DockerController.ResourceUsageMapValue.resource_usage:type_name -> DockerController.ResourceUsage
-	6,  // 2: DockerController.ListContainersResponse.containers:type_name -> DockerController.Container
-	7,  // 3: DockerController.ListProjectsResponse.projects:type_name -> DockerController.Project
-	1,  // 4: DockerController.GetResourceUsageResponse.ContainerUsageEntry.value:type_name -> DockerController.ResourceUsageMapValue
-	8,  // 5: DockerController.DockerService.Ping:input_type -> google.protobuf.Empty
-	8,  // 6: DockerController.DockerService.GetResourceUsage:input_type -> google.protobuf.Empty
-	8,  // 7: DockerController.DockerService.GetTotalResourceUsage:input_type -> google.protobuf.Empty
-	8,  // 8: DockerController.DockerService.ListContainers:input_type -> google.protobuf.Empty
-	8,  // 9: DockerController.DockerService.ListProjects:input_type -> google.protobuf.Empty
-	8,  // 10: DockerController.DockerService.Ping:output_type -> google.protobuf.Empty
+	3,  // 0: DockerController.GetResourceUsageResponse.container_usage:type_name -> DockerController.GetResourceUsageResponse.ContainerUsageEntry
+	4,  // 1: DockerController.ListContainersResponse.containers:type_name -> DockerController.Container
+	5,  // 2: DockerController.ListProjectsResponse.projects:type_name -> DockerController.Project
+	6,  // 3: DockerController.GetResourceUsageResponse.ContainerUsageEntry.value:type_name -> DockerController.ResourceUsageMapValue
+	7,  // 4: DockerController.DockerService.Ping:input_type -> google.protobuf.Empty
+	7,  // 5: DockerController.DockerService.GetResourceUsage:input_type -> google.protobuf.Empty
+	7,  // 6: DockerController.DockerService.GetTotalResourceUsage:input_type -> google.protobuf.Empty
+	7,  // 7: DockerController.DockerService.ListContainers:input_type -> google.protobuf.Empty
+	7,  // 8: DockerController.DockerService.ListProjects:input_type -> google.protobuf.Empty
+	7,  // 9: DockerController.DockerService.CleanUp:input_type -> google.protobuf.Empty
+	7,  // 10: DockerController.DockerService.Ping:output_type -> google.protobuf.Empty
 	0,  // 11: DockerController.DockerService.GetResourceUsage:output_type -> DockerController.GetResourceUsageResponse
-	5,  // 12: DockerController.DockerService.GetTotalResourceUsage:output_type -> DockerController.ResourceUsage
-	2,  // 13: DockerController.DockerService.ListContainers:output_type -> DockerController.ListContainersResponse
-	3,  // 14: DockerController.DockerService.ListProjects:output_type -> DockerController.ListProjectsResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	8,  // 12: DockerController.DockerService.GetTotalResourceUsage:output_type -> DockerController.ResourceUsage
+	1,  // 13: DockerController.DockerService.ListContainers:output_type -> DockerController.ListContainersResponse
+	2,  // 14: DockerController.DockerService.ListProjects:output_type -> DockerController.ListProjectsResponse
+	7,  // 15: DockerController.DockerService.CleanUp:output_type -> google.protobuf.Empty
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_docker_controller_proto_init() }
@@ -293,7 +240,7 @@ func file_proto_docker_controller_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_docker_controller_proto_rawDesc), len(file_proto_docker_controller_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

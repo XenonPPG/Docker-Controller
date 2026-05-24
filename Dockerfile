@@ -19,6 +19,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /main ./app/main.go
 # Stage 2: Final image
 FROM alpine:3.20
 
+RUN apk add --no-cache docker-cli docker-cli-compose
+
 WORKDIR /root/
 
 # Copy executable from builder

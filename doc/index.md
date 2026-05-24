@@ -4,9 +4,9 @@
 ## Table of Contents
 
 - [proto/compose.proto](#proto_compose-proto)
-    - [ContainerWithResourceUsage](#DockerController-ContainerWithResourceUsage)
     - [CreateProjectRequest](#DockerController-CreateProjectRequest)
     - [GetProjectResourceUsageResponse](#DockerController-GetProjectResourceUsageResponse)
+    - [GetProjectResourceUsageResponse.StatsEntry](#DockerController-GetProjectResourceUsageResponse-StatsEntry)
     - [Project](#DockerController-Project)
     - [ProjectRequest](#DockerController-ProjectRequest)
   
@@ -25,7 +25,6 @@
     - [GetResourceUsageResponse.ContainerUsageEntry](#DockerController-GetResourceUsageResponse-ContainerUsageEntry)
     - [ListContainersResponse](#DockerController-ListContainersResponse)
     - [ListProjectsResponse](#DockerController-ListProjectsResponse)
-    - [ResourceUsageMapValue](#DockerController-ResourceUsageMapValue)
   
     - [DockerService](#DockerController-DockerService)
   
@@ -35,6 +34,7 @@
     - [MemoryStats](#DockerController-MemoryStats)
     - [NetworkStats](#DockerController-NetworkStats)
     - [ResourceUsage](#DockerController-ResourceUsage)
+    - [ResourceUsageMapValue](#DockerController-ResourceUsageMapValue)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -44,22 +44,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## proto/compose.proto
-
-
-
-<a name="DockerController-ContainerWithResourceUsage"></a>
-
-### ContainerWithResourceUsage
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| container | [Container](#DockerController-Container) |  |  |
-| resource_usage | [ResourceUsage](#DockerController-ResourceUsage) |  |  |
-
-
-
 
 
 
@@ -87,7 +71,23 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| stats | [ContainerWithResourceUsage](#DockerController-ContainerWithResourceUsage) | repeated |  |
+| stats | [GetProjectResourceUsageResponse.StatsEntry](#DockerController-GetProjectResourceUsageResponse-StatsEntry) | repeated |  |
+
+
+
+
+
+
+<a name="DockerController-GetProjectResourceUsageResponse-StatsEntry"></a>
+
+### GetProjectResourceUsageResponse.StatsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [ResourceUsageMapValue](#DockerController-ResourceUsageMapValue) |  |  |
 
 
 
@@ -119,7 +119,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  |  |
+| name | [string](#string) |  |  |
 
 
 
@@ -319,22 +319,6 @@
 
 
 
-
-<a name="DockerController-ResourceUsageMapValue"></a>
-
-### ResourceUsageMapValue
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| image | [string](#string) |  |  |
-| resource_usage | [ResourceUsage](#DockerController-ResourceUsage) |  |  |
-
-
-
-
-
  
 
  
@@ -354,6 +338,7 @@
 | GetTotalResourceUsage | [.google.protobuf.Empty](#google-protobuf-Empty) | [ResourceUsage](#DockerController-ResourceUsage) |  |
 | ListContainers | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListContainersResponse](#DockerController-ListContainersResponse) |  |
 | ListProjects | [.google.protobuf.Empty](#google-protobuf-Empty) | [ListProjectsResponse](#DockerController-ListProjectsResponse) |  |
+| CleanUp | [.google.protobuf.Empty](#google-protobuf-Empty) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
 
  
 
@@ -444,6 +429,22 @@
 | memory | [MemoryStats](#DockerController-MemoryStats) |  |  |
 | networks | [NetworkStats](#DockerController-NetworkStats) | repeated |  |
 | block_io | [BlockIOStats](#DockerController-BlockIOStats) |  |  |
+
+
+
+
+
+
+<a name="DockerController-ResourceUsageMapValue"></a>
+
+### ResourceUsageMapValue
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| image | [string](#string) |  |  |
+| resource_usage | [ResourceUsage](#DockerController-ResourceUsage) |  |  |
 
 
 
