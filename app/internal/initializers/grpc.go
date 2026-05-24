@@ -1,18 +1,18 @@
 package initializers
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net"
 	"os"
-	"os/signal"
-	"syscall"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
-func ConnectGRPC(registerFunc func(server *grpc.Server)) error {
+func ConnectGRPC(ctx context.Context, registerFunc func(server *grpc.Server)) error {
 	lis, err := net.Listen(os.Getenv("GRPC_NETWORK"), ":"+os.Getenv("GRPC_PORT"))
 	if err != nil {
 		return fmt.Errorf("failed to listen: %w", err)
@@ -22,27 +22,20 @@ func ConnectGRPC(registerFunc func(server *grpc.Server)) error {
 	reflection.Register(s)
 	registerFunc(s)
 
-	// server error channel
 	serverError := make(chan error, 1)
 
-	// serve
 	go func() {
 		log.Printf("Server listening at %v", lis.Addr())
-		if err := s.Serve(lis); err != nil {
+		if err := s.Serve(lis); err != nil && !errors.Is(err, grpc.ErrServerStopped) {
 			serverError <- err
 		}
 	}()
 
-	// system signals channel
-	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
-
-	// block until error or signal
 	select {
 	case err := <-serverError:
 		return fmt.Errorf("gRPC server error: %w", err)
-	case sig := <-stop:
-		log.Printf("Received signal: %v. Shutting down...", sig)
+	case <-ctx.Done():
+		log.Println("Received cancel signal. Shutting down gRPC server...")
 		s.GracefulStop()
 		log.Println("gRPC server gracefully stopped")
 		return nil

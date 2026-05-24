@@ -14,14 +14,11 @@ import (
 )
 
 func main() {
-	// error group
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	// TODO: review if I need this
-	g, ctx := errgroup.WithContext(ctx)
+	g, gCtx := errgroup.WithContext(ctx)
 
-	// docker
 	cli := initializers.InitDockerClient()
 	defer func(c *client.Client) {
 		if err := c.Close(); err != nil {
@@ -29,10 +26,9 @@ func main() {
 		}
 	}(cli)
 
-	// gRPC
 	server := &controllers.Server{}
 	g.Go(func() error {
-		return initializers.ConnectGRPC(server.RegisterFunc())
+		return initializers.ConnectGRPC(gCtx, server.RegisterFunc())
 	})
 
 	if err := g.Wait(); err != nil {
