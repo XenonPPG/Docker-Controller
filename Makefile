@@ -12,4 +12,4 @@ generate-proto:
 grpc-ui:
 	grpcui -plaintext localhost:50051
 
-.PHONY: generate-doc, generate-proto
+.PHONY: generate-doc, generate-proto, grpc-ui
